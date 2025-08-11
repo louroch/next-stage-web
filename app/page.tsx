@@ -433,28 +433,61 @@ export default function HomePage() {
             <div className="w-16 h-px bg-[#D4CFBC]"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {artists.map((artist) => (
-              <Link key={artist.slug} href={`/djs/${artist.slug}`} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-lg bg-[#2a2424]/50 border border-[#D4CFBC]/20 group-hover:border-[#D4CFBC] transition-all duration-500">
-                  <div className="aspect-[4/5] relative overflow-hidden">
-                    <Image
-                      src={artist.image}
-                      alt={artist.name}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          <div className="relative">
+            <div
+              className="overflow-hidden cursor-grab active:cursor-grabbing"
+              ref={djCarouselRef}
+              onMouseDown={(e) => handleMouseDown(e, djCarouselRef)}
+              onMouseMove={(e) => handleMouseMove(e, djCarouselRef)}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onTouchStart={(e) => handleTouchStart(e, djCarouselRef)}
+              onTouchMove={(e) => handleTouchMove(e, djCarouselRef)}
+              onTouchEnd={handleMouseUp}
+            >
+              <div
+                className="flex transition-transform duration-700 ease-out"
+                style={{ transform: `translateX(-${currentDJIndex * 100}%)` }}
+              >
+                {artists.map((artist, index) => (
+                  <div key={artist.id} className="w-full flex-shrink-0 px-2 lg:px-4">
+                    <Link href={`/djs/${artist.slug}`} className="group cursor-pointer">
+                      <div className="relative overflow-hidden rounded-lg bg-[#2a2424]/50 border border-[#D4CFBC]/20 group-hover:border-[#D4CFBC] transition-all duration-500">
+                        <div className="aspect-[4/5] relative overflow-hidden">
+                          <Image
+                            src={artist.image}
+                            alt={artist.name}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-700"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        </div>
+                        <div className="p-6">
+                          <h3 className="text-xl font-bold tracking-[0.1em] uppercase mb-2 text-[#D4CFBC] group-hover:text-white transition-colors duration-300">
+                            {artist.name}
+                          </h3>
+                          <span className="text-xs tracking-[0.2em] opacity-70 uppercase">ARTISTAS</span>
+                        </div>
+                      </div>
+                    </Link>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold tracking-[0.1em] uppercase mb-2 text-[#D4CFBC] group-hover:text-white transition-colors duration-300">
-                      {artist.name}
-                    </h3>
-                    <span className="text-xs tracking-[0.2em] opacity-70 uppercase">ARTISTAS</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation */}
+            <button
+              onClick={prevDJ}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 lg:-translate-x-6 bg-transparent border border-[#D4CFBC] text-[#D4CFBC] p-3 lg:p-4 hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-500"
+            >
+              <ChevronLeft size={16} className="lg:w-5 lg:h-5" />
+            </button>
+            <button
+              onClick={nextDJ}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 lg:translate-x-6 bg-transparent border border-[#D4CFBC] text-[#D4CFBC] p-3 lg:p-4 hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-500"
+            >
+              <ChevronRight size={16} className="lg:w-5 lg:h-5" />
+            </button>
           </div>
         </div>
       </section>
