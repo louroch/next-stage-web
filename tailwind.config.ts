@@ -75,6 +75,10 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+        "special-gothic": ["var(--font-special-gothic)", "Inter", "system-ui", "sans-serif"],
+        timmana: ["var(--font-timmana)", "Inter", "system-ui", "sans-serif"],
+        roboto: ["var(--font-roboto)", "Inter", "system-ui", "sans-serif"],
+        inter: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
       },
     },
   },

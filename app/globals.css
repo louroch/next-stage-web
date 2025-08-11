@@ -6,6 +6,23 @@
   .text-balance {
     text-wrap: balance;
   }
+  
+  /* Clases de fuentes personalizadas */
+  .font-special-gothic {
+    font-family: var(--font-special-gothic), var(--font-sans), sans-serif;
+  }
+  
+  .font-timmana {
+    font-family: var(--font-timmana), var(--font-sans), sans-serif;
+  }
+  
+  .font-roboto {
+    font-family: var(--font-roboto), var(--font-sans), sans-serif;
+  }
+  
+  .font-inter {
+    font-family: var(--font-inter), var(--font-sans), sans-serif;
+  }
 }
 
 @layer base {
