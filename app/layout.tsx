@@ -30,7 +30,7 @@ html {
 }
         `}</style>
       </head>
-      <body className={`${roboto.variable} ${specialGothic.variable} ${timmana.variable} ${inter.variable}`}>
+      <body className={`${roboto.variable} ${inter.variable}`}>
         {children}
       </body>
     </html>

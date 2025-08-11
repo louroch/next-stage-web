@@ -1,31 +1,4 @@
 import { Inter, Roboto } from 'next/font/google'
-import localFont from 'next/font/local'
-
-// Fuente para títulos - Special Gothic Expanded One
-export const specialGothic = localFont({
-  src: [
-    {
-      path: '../public/fonts/SpecialGothicExpandedOne-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-special-gothic',
-  display: 'swap',
-})
-
-// Fuente para subtítulos - Timmana
-export const timmana = localFont({
-  src: [
-    {
-      path: '../public/fonts/Timmana-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-timmana',
-  display: 'swap',
-})
 
 // Fuente para cuerpo de texto - Roboto
 export const roboto = Roboto({
@@ -41,3 +14,14 @@ export const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
 })
+
+// Fuentes personalizadas con fallback a Inter
+export const specialGothic = {
+  variable: '--font-special-gothic',
+  style: { fontFamily: 'var(--font-inter), Inter, system-ui, sans-serif' }
+}
+
+export const timmana = {
+  variable: '--font-timmana',
+  style: { fontFamily: 'var(--font-inter), Inter, system-ui, sans-serif' }
+}
