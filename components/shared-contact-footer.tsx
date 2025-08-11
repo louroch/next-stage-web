@@ -8,7 +8,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Instagram, Facebook, Twitter } from "lucide-react"
+import { Instagram, Facebook, WhatsApp, Linktree } from "@/components/ui/icons"
 
 export default function SharedContactFooter() {
   const [formData, setFormData] = useState({
@@ -76,19 +76,19 @@ export default function SharedContactFooter() {
   return (
     <>
       {/* Contact Section */}
-      <section id="contacto" className="py-24 px-4 lg:px-12 bg-[#181313]">
+      <section id="contacto" className="py-16 sm:py-20 lg:py-24 px-4 lg:px-12 bg-[#181313]">
         <div className="max-w-4xl mx-auto">
-          <div className="mb-20">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-4xl md:text-6xl font-bold tracking-[0.1em] uppercase text-[#D4CFBC]">BOOKING</h2>
-              <div className="w-16 h-px bg-[#D4CFBC]"></div>
+          <div className="mb-12 sm:mb-16 lg:mb-20">
+            <div className="flex items-center justify-between mb-6 sm:mb-8">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[0.1em] uppercase text-[#D4CFBC]">BOOKING</h2>
+              <div className="w-12 sm:w-16 h-px bg-[#D4CFBC]"></div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
             {/* Contact Form */}
             <div>
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
                 <div>
                   <Input
                     name="name"
@@ -96,7 +96,7 @@ export default function SharedContactFooter() {
                     onChange={handleInputChange}
                     placeholder="Nombre"
                     required
-                    className="bg-transparent border-0 border-b border-[#D4CFBC]/30 text-[#D4CFBC] placeholder:text-[#D4CFBC]/50 focus:border-[#D4CFBC] tracking-[0.1em] rounded-none px-0 py-4"
+                    className="bg-transparent border-0 border-b border-[#D4CFBC]/30 text-[#D4CFBC] placeholder:text-[#D4CFBC]/50 focus:border-[#D4CFBC] tracking-[0.1em] rounded-none px-0 py-3 sm:py-4 text-sm sm:text-base"
                   />
                 </div>
                 <div>
@@ -107,7 +107,7 @@ export default function SharedContactFooter() {
                     type="email"
                     placeholder="Email"
                     required
-                    className="bg-transparent border-0 border-b border-[#D4CFBC]/30 text-[#D4CFBC] placeholder:text-[#D4CFBC]/50 focus:border-[#D4CFBC] tracking-[0.1em] rounded-none px-0 py-4"
+                    className="bg-transparent border-0 border-b border-[#D4CFBC]/30 text-[#D4CFBC] placeholder:text-[#D4CFBC]/50 focus:border-[#D4CFBC] tracking-[0.1em] rounded-none px-0 py-3 sm:py-4 text-sm sm:text-base"
                   />
                 </div>
                 <div>
@@ -117,7 +117,7 @@ export default function SharedContactFooter() {
                     onChange={handleInputChange}
                     placeholder="Asunto"
                     required
-                    className="bg-transparent border-0 border-b border-[#D4CFBC]/30 text-[#D4CFBC] placeholder:text-[#D4CFBC]/50 focus:border-[#D4CFBC] tracking-[0.1em] rounded-none px-0 py-4"
+                    className="bg-transparent border-0 border-b border-[#D4CFBC]/30 text-[#D4CFBC] placeholder:text-[#D4CFBC]/50 focus:border-[#D4CFBC] tracking-[0.1em] rounded-none px-0 py-3 sm:py-4 text-sm sm:text-base"
                   />
                 </div>
                 <div>
@@ -128,7 +128,7 @@ export default function SharedContactFooter() {
                     placeholder="Mensaje"
                     rows={4}
                     required
-                    className="bg-transparent border-0 border-b border-[#D4CFBC]/30 text-[#D4CFBC] placeholder:text-[#D4CFBC]/50 focus:border-[#D4CFBC] tracking-[0.1em] rounded-none px-0 py-4 resize-none"
+                    className="bg-transparent border-0 border-b border-[#D4CFBC]/30 text-[#D4CFBC] placeholder:text-[#D4CFBC]/50 focus:border-[#D4CFBC] tracking-[0.1em] rounded-none px-0 py-3 sm:py-4 resize-none text-sm sm:text-base"
                   />
                 </div>
 
@@ -142,7 +142,7 @@ export default function SharedContactFooter() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-transparent border border-[#D4CFBC] text-[#D4CFBC] hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-500 font-bold tracking-[0.2em] px-12 py-4 disabled:opacity-50"
+                  className="bg-transparent border border-[#D4CFBC] text-[#D4CFBC] hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-500 font-bold tracking-[0.2em] px-8 sm:px-12 py-3 sm:py-4 disabled:opacity-50 text-sm sm:text-base w-full sm:w-auto"
                 >
                   {isSubmitting ? "Enviando..." : "Enviar"}
                 </Button>
@@ -161,24 +161,38 @@ export default function SharedContactFooter() {
 
               <div>
                 <h3 className="text-xl font-bold tracking-[0.1em] mb-6 uppercase text-[#D4CFBC]">REDES</h3>
-                <div className="flex space-x-6">
+                <div className="flex flex-wrap gap-4 sm:gap-6">
                   <Link
-                    href="#"
-                    className="w-12 h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
+                    href="https://www.instagram.com/nextstage.ar"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 sm:w-12 sm:h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
                   >
-                    <Instagram size={20} className="group-hover:scale-110 transition-transform duration-500" />
+                    <Instagram size={18} className="sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-500" />
                   </Link>
                   <Link
-                    href="#"
-                    className="w-12 h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
+                    href="https://www.facebook.com/nextstage.ar/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 sm:w-12 sm:h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
                   >
-                    <Facebook size={20} className="group-hover:scale-110 transition-transform duration-500" />
+                    <Facebook size={18} className="sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-500" />
                   </Link>
                   <Link
-                    href="#"
-                    className="w-12 h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
+                    href="https://api.whatsapp.com/send?phone=543814781887&fbclid=PAQ0xDSwMHJ4RleHRuA2FlbQIxMAABpyOa7Qbzrla0GeMDiu2OnqYFLcO-fuZr-STK5WujO06HZdCiIJH4Ch9vZOnQ_aem_yETdk4r4lbOX0JCQmBa_Mg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 sm:w-12 sm:h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
                   >
-                    <Twitter size={20} className="group-hover:scale-110 transition-transform duration-500" />
+                    <WhatsApp size={18} className="sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-500" />
+                  </Link>
+                  <Link
+                    href="https://linktr.ee/nextstagebooking?fbclid=PAQ0xDSwMHJ8NleHRuA2FlbQIxMQABp-sX24PSxrDsX9ys4K19lwV3lxxs8eM713XriVJtc0AAkj0vMFZwEbql4bNV_aem_bFaHlJnhABHk82i2S54Mzg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 sm:w-12 sm:h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
+                  >
+                    <Linktree size={18} className="sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-500" />
                   </Link>
                 </div>
               </div>
@@ -188,11 +202,11 @@ export default function SharedContactFooter() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black py-16 px-4 lg:px-12">
+      <footer className="bg-black py-12 sm:py-16 px-4 lg:px-12">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
             <div>
-              <div className="w-32 mb-6">
+              <div className="w-24 sm:w-32 mb-6">
                 <Image
                   src="/images/nextstage-logo.png"
                   alt="NEXTSTAGE"
@@ -220,7 +234,10 @@ export default function SharedContactFooter() {
                   QUIÉNES SOMOS
                 </Link>
                 <Link href="/djs" className="block hover:text-white transition-colors duration-500">
-                  DJS
+                  ARTISTAS
+                </Link>
+                <Link href="/#servicios" className="block hover:text-white transition-colors duration-500">
+                  SERVICIOS
                 </Link>
                 <Link href="/eventos" className="block hover:text-white transition-colors duration-500">
                   EVENTOS
@@ -243,18 +260,18 @@ export default function SharedContactFooter() {
 
             <div>
               <h4 className="font-bold tracking-[0.1em] mb-6 uppercase text-sm text-[#D4CFBC]">PARTNERS</h4>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="w-16 h-8 bg-[#D4CFBC]/10 border border-[#D4CFBC]/20"></div>
-                <div className="w-16 h-8 bg-[#D4CFBC]/10 border border-[#D4CFBC]/20"></div>
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="w-14 h-7 sm:w-16 sm:h-8 bg-[#D4CFBC]/10 border border-[#D4CFBC]/20"></div>
+                <div className="w-14 h-7 sm:w-16 sm:h-8 bg-[#D4CFBC]/10 border border-[#D4CFBC]/20"></div>
               </div>
             </div>
           </div>
 
-          <div className="border-t border-[#D4CFBC]/20 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-xs opacity-50 mb-4 md:mb-0 tracking-[0.1em] uppercase text-[#D4CFBC]">
+          <div className="border-t border-[#D4CFBC]/20 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <p className="text-xs opacity-50 text-center sm:text-left tracking-[0.1em] uppercase text-[#D4CFBC]">
               © 2025 NEXTSTAGE. TODOS LOS DERECHOS RESERVADOS.
             </p>
-            <div className="flex space-x-8 text-xs tracking-[0.1em] uppercase text-[#D4CFBC]">
+            <div className="flex space-x-6 sm:space-x-8 text-xs tracking-[0.1em] uppercase text-[#D4CFBC]">
               <Link href="#" className="hover:text-white transition-colors duration-500">
                 PRIVACIDAD
               </Link>

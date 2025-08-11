@@ -4,9 +4,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import SharedContactFooter from "@/components/shared-contact-footer"
-import { Instagram, Music, Play, ExternalLink, Calendar, ArrowLeft } from "lucide-react"
-import { useState } from "react"
+import { Instagram, Facebook, Music, Play, ExternalLink, Calendar, ArrowLeft } from "@/components/ui/icons"
+import { use } from "react"
 import { notFound } from "next/navigation"
+import SharedNavbar from "@/components/shared-navbar"
+import ScrollToTop from "@/components/scroll-to-top"
 
 const djsData = {
   "dani-leon": {
@@ -62,9 +64,9 @@ const djsData = {
   },
 }
 
-export default function DJProfilePage({ params }: { params: { slug: string } }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const dj = djsData[params.slug as keyof typeof djsData]
+export default function DJProfilePage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = use(params)
+  const dj = djsData[resolvedParams.slug as keyof typeof djsData]
 
   if (!dj) {
     notFound()
@@ -72,126 +74,17 @@ export default function DJProfilePage({ params }: { params: { slug: string } }) 
 
   return (
     <div className="min-h-screen bg-[#181313] text-[#D4CFBC]">
-      {/* Header */}
-      <header className="flex items-center justify-between p-6 lg:p-8 relative">
-        <div className="flex items-center">
-          <Link href="/">
-            <Image src="/images/nextstage-logo.png" alt="NEXTSTAGE" width={120} height={40} className="h-8 w-auto" />
-          </Link>
-        </div>
+      <SharedNavbar currentPage="djs" />
+      
+      {/* Spacer for fixed navbar */}
+      <div className="h-16"></div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <Link
-            href="/"
-            className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors relative group"
-          >
-            INICIO
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4CFBC] transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link
-            href="/eventos"
-            className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors relative group"
-          >
-            EVENTOS
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4CFBC] transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link href="/djs" className="text-sm font-medium tracking-wider uppercase text-white relative">
-            DJS
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#D4CFBC]"></span>
-          </Link>
-          <Link
-            href="/#equipo"
-            className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors relative group"
-          >
-            EQUIPO
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4CFBC] transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link
-            href="/#contacto"
-            className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors relative group"
-          >
-            CONTACTO
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4CFBC] transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-        </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden flex flex-col space-y-1 z-[100] relative"
-          aria-label="Toggle menu"
-        >
-          <span
-            className={`w-6 h-0.5 bg-[#D4CFBC] transition-all duration-300 ${isMenuOpen ? "rotate-45 translate-y-1.5" : ""}`}
-          ></span>
-          <span
-            className={`w-6 h-0.5 bg-[#D4CFBC] transition-all duration-300 ${isMenuOpen ? "opacity-0" : ""}`}
-          ></span>
-          <span
-            className={`w-6 h-0.5 bg-[#D4CFBC] transition-all duration-300 ${isMenuOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
-          ></span>
-        </button>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="fixed inset-0 bg-[#181313] z-[90] flex flex-col">
-            <div className="absolute top-6 right-6">
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="w-10 h-10 rounded-full border border-[#D4CFBC] flex items-center justify-center hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-300"
-                aria-label="Close menu"
-              >
-                <ArrowLeft className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="flex-1 flex flex-col justify-center items-center space-y-8">
-              <Link
-                href="/"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-medium tracking-wider uppercase hover:text-white transition-colors"
-              >
-                INICIO
-              </Link>
-              <Link
-                href="/eventos"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-medium tracking-wider uppercase hover:text-white transition-colors"
-              >
-                EVENTOS
-              </Link>
-              <Link
-                href="/djs"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-medium tracking-wider uppercase text-white"
-              >
-                DJS
-              </Link>
-              <Link
-                href="/#equipo"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-medium tracking-wider uppercase hover:text-white transition-colors"
-              >
-                EQUIPO
-              </Link>
-              <Link
-                href="/#contacto"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-medium tracking-wider uppercase hover:text-white transition-colors"
-              >
-                CONTACTO
-              </Link>
-            </div>
-          </div>
-        )}
-      </header>
-
-      {/* Back to DJs */}
+      {/* Back to Artists */}
       <div className="px-6 lg:px-8 py-4">
         <Link
           href="/djs"
-          className="inline-flex items-center text-sm tracking-wider uppercase opacity-60 hover:opacity-100 transition-opacity"
+          className="inline-flex items-center text-[#D4CFBC] hover:text-white transition-colors duration-300 mb-8 group"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           VOLVER A ARTISTAS
@@ -239,10 +132,20 @@ export default function DJProfilePage({ params }: { params: { slug: string } }) 
               {/* Social Media */}
               <div className="flex items-center space-x-6">
                 <Link
-                  href="#"
-                  className="w-12 h-12 border border-[#D4CFBC] rounded-full flex items-center justify-center hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-300 group"
+                  href="https://www.instagram.com/nextstage.ar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
                 >
-                  <Instagram className="w-5 h-5" />
+                  <Instagram size={16} className="group-hover:scale-110 transition-transform duration-500" />
+                </Link>
+                <Link
+                  href="https://www.facebook.com/nextstage.ar/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
+                >
+                  <Facebook size={16} className="group-hover:scale-110 transition-transform duration-500" />
                 </Link>
                 <Link
                   href="#"
@@ -331,6 +234,7 @@ export default function DJProfilePage({ params }: { params: { slug: string } }) 
       </section>
 
       <SharedContactFooter />
+      <ScrollToTop />
     </div>
   )
 }

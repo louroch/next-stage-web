@@ -4,13 +4,16 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import SharedContactFooter from "@/components/shared-contact-footer"
-import { ArrowLeft } from "lucide-react"
+import SharedNavbar from "@/components/shared-navbar"
+import { ArrowLeft } from "@/components/ui/icons"
 import { useState } from "react"
+import ScrollToTop from "@/components/scroll-to-top"
 
-export default function DJsListingPage() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+export default function ArtistsListingPage() {
+  const [selectedGenre, setSelectedGenre] = useState<string>("all")
+  const [searchTerm, setSearchTerm] = useState("")
 
-  const djs = [
+  const artists = [
     {
       slug: "dani-leon",
       name: "DANI LEÓN",
@@ -42,120 +45,11 @@ export default function DJsListingPage() {
 
   return (
     <div className="min-h-screen bg-[#181313] text-[#D4CFBC]">
-      {/* Header */}
-      <header className="flex items-center justify-between p-6 lg:p-8 relative">
-        <div className="flex items-center">
-          <Link href="/">
-            <Image src="/images/nextstage-logo.png" alt="NEXTSTAGE" width={120} height={40} className="h-8 w-auto" />
-          </Link>
-        </div>
+      <SharedNavbar currentPage="djs" />
+      
+      {/* Spacer for fixed navbar */}
+      <div className="h-16"></div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <Link
-            href="/"
-            className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors relative group"
-          >
-            INICIO
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4CFBC] transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link
-            href="/eventos"
-            className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors relative group"
-          >
-            EVENTOS
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4CFBC] transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link href="/djs" className="text-sm font-medium tracking-wider uppercase text-white relative">
-            DJS
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#D4CFBC]"></span>
-          </Link>
-          <Link
-            href="/#equipo"
-            className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors relative group"
-          >
-            EQUIPO
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4CFBC] transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link
-            href="/#contacto"
-            className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors relative group"
-          >
-            CONTACTO
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4CFBC] transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden flex flex-col space-y-1 z-[100] relative"
-          aria-label="Toggle menu"
-        >
-          <span
-            className={`w-6 h-0.5 bg-[#D4CFBC] transition-all duration-300 ${isMenuOpen ? "rotate-45 translate-y-1.5" : ""}`}
-          ></span>
-          <span
-            className={`w-6 h-0.5 bg-[#D4CFBC] transition-all duration-300 ${isMenuOpen ? "opacity-0" : ""}`}
-          ></span>
-          <span
-            className={`w-6 h-0.5 bg-[#D4CFBC] transition-all duration-300 ${isMenuOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
-          ></span>
-        </button>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="fixed inset-0 bg-[#181313] z-[90] flex flex-col">
-            <div className="absolute top-6 right-6">
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="w-10 h-10 rounded-full border border-[#D4CFBC] flex items-center justify-center hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-300"
-                aria-label="Close menu"
-              >
-                <ArrowLeft className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="flex-1 flex flex-col justify-center items-center space-y-8">
-              <Link
-                href="/"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-medium tracking-wider uppercase hover:text-white transition-colors"
-              >
-                INICIO
-              </Link>
-              <Link
-                href="/eventos"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-medium tracking-wider uppercase hover:text-white transition-colors"
-              >
-                EVENTOS
-              </Link>
-              <Link
-                href="/djs"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-medium tracking-wider uppercase text-white"
-              >
-                DJS
-              </Link>
-              <Link
-                href="/#equipo"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-medium tracking-wider uppercase hover:text-white transition-colors"
-              >
-                EQUIPO
-              </Link>
-              <Link
-                href="/#contacto"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-medium tracking-wider uppercase hover:text-white transition-colors"
-              >
-                CONTACTO
-              </Link>
-            </div>
-          </div>
-        )}
-      </header>
 
       {/* Hero Section */}
       <section className="px-6 lg:px-8 py-12 relative">
@@ -199,34 +93,34 @@ export default function DJsListingPage() {
         </div>
       </section>
 
-      {/* DJs Grid */}
+      {/* Artists Grid */}
       <section className="px-6 lg:px-8 py-16">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {djs.map((dj) => (
-              <Link key={dj.slug} href={`/djs/${dj.slug}`} className="group cursor-pointer">
+            {artists.map((artist) => (
+              <Link key={artist.slug} href={`/djs/${artist.slug}`} className="group cursor-pointer">
                 <div className="relative mb-6">
                   <div className="aspect-square bg-[#2a2424] rounded-lg overflow-hidden">
                     <Image
-                      src={dj.image || "/placeholder.svg"}
-                      alt={dj.name}
+                      src={artist.image || "/placeholder.svg"}
+                      alt={artist.name}
                       width={600}
                       height={600}
                       className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
                     />
                   </div>
                   <div className="absolute top-4 right-4 bg-[#D4CFBC] text-[#181313] px-3 py-1 text-xs font-bold tracking-wider uppercase">
-                    {dj.specialty}
+                    {artist.specialty}
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold tracking-wide uppercase group-hover:text-white transition-colors">
-                    {dj.name}
+                    {artist.name}
                   </h3>
 
                   <div className="flex flex-wrap gap-2">
-                    {dj.genres.map((genre) => (
+                    {artist.genres.map((genre) => (
                       <span
                         key={genre}
                         className="px-2 py-1 border border-[#D4CFBC] border-opacity-50 text-xs tracking-widest uppercase"
@@ -236,7 +130,7 @@ export default function DJsListingPage() {
                     ))}
                   </div>
 
-                  <p className="text-sm opacity-90 leading-relaxed">{dj.description}</p>
+                  <p className="text-sm opacity-90 leading-relaxed">{artist.description}</p>
 
                   <Button className="w-full bg-transparent border border-[#D4CFBC] text-[#D4CFBC] hover:bg-[#D4CFBC] hover:text-[#181313] py-3 text-xs font-medium tracking-widest uppercase rounded-none transition-all duration-300">
                     VER PERFIL
@@ -262,6 +156,7 @@ export default function DJsListingPage() {
       </section>
 
       <SharedContactFooter />
+      <ScrollToTop />
     </div>
   )
 }

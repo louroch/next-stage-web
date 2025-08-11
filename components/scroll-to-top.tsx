@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ArrowUp } from "lucide-react"
+import { ArrowUp } from "@/components/ui/icons"
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false)
@@ -31,7 +31,7 @@ export default function ScrollToTop() {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-[#D4CFBC] text-[#181313] rounded-full flex items-center justify-center hover:bg-white transition-all duration-300 shadow-lg"
+          className="fixed bottom-8 right-8 z-[90] w-12 h-12 bg-[#D4CFBC] text-[#181313] rounded-full flex items-center justify-center hover:bg-white transition-all duration-300 shadow-lg"
           aria-label="Scroll to top"
         >
           <ArrowUp size={20} />

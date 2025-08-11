@@ -2,54 +2,86 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import SharedContactFooter from "@/components/shared-contact-footer"
-import { Calendar, MapPin, Clock, Users, ExternalLink, Ticket, ArrowLeft } from "lucide-react"
+import SharedNavbar from "@/components/shared-navbar"
+import { Calendar, MapPin, Clock, Users, ExternalLink, Ticket, ArrowLeft } from "@/components/ui/icons"
+import ScrollToTop from "@/components/scroll-to-top"
 
 export default function EventosPage() {
-  const featuredEvent = {
-    id: 1,
-    title: "NEXTSTAGE SHOWCASE",
-    date: "15 MAR 2024",
-    time: "23:00",
-    venue: "WAREHOUSE DISTRICT",
-    location: "BUENOS AIRES",
-    djs: ["ALEX RIVERA", "KEVIN BALB", "BALTA"],
-    image: "/placeholder.svg?height=800&width=1200",
-    status: "PRÓXIMO",
-  }
-
-  const upcomingEvents = [
+  const featuredEvents = [
+    {
+      id: 1,
+      title: "NEXT STAGE FESTIVAL",
+      date: "15 DICIEMBRE 2024",
+      location: "CLUB ELECTRONIC",
+      time: "22:00 - 06:00",
+      capacity: "500 PERSONAS",
+      artists: ["ALEX RIVERA", "KEVIN BALB", "BALTA"],
+      image: "/images/event1.jpg",
+      ticketPrice: "€25",
+      description: "Una noche épica de música electrónica con los mejores artistas de la escena.",
+    },
     {
       id: 2,
-      title: "UNDERGROUND SESSIONS",
-      date: "22 MAR 2024",
-      time: "22:00",
-      venue: "CLUB BASEMENT",
-      location: "CÓRDOBA",
-      djs: ["BALTA", "GUEST DJ"],
-      image: "/placeholder.svg?height=400&width=600",
-      status: "ENTRADAS DISPONIBLES",
+      title: "UNDERGROUND SESSION",
+      date: "22 DICIEMBRE 2024",
+      location: "WAREHOUSE STUDIO",
+      time: "23:00 - 05:00",
+      capacity: "300 PERSONAS",
+      artists: ["BALTA", "GUEST DJ"],
+      image: "/images/event2.jpg",
+      ticketPrice: "€20",
+      description: "Sesión underground con sonidos profundos y atmosféricos.",
     },
     {
       id: 3,
-      title: "MELODIC NIGHT",
-      date: "05 ABR 2024",
-      time: "23:30",
-      venue: "ROOFTOP VENUE",
-      location: "ROSARIO",
-      djs: ["ALEX RIVERA", "KEVIN BALB"],
-      image: "/placeholder.svg?height=400&width=600",
-      status: "EARLY BIRD",
+      title: "TECHNO NIGHT",
+      date: "29 DICIEMBRE 2024",
+      location: "CLUB TECHNO",
+      time: "21:00 - 04:00",
+      capacity: "400 PERSONAS",
+      artists: ["ALEX RIVERA", "KEVIN BALB"],
+      image: "/images/event3.jpg",
+      ticketPrice: "€30",
+      description: "Noche de techno puro con ritmos industriales y beats potentes.",
     },
     {
       id: 4,
-      title: "TECHNO COLLECTIVE",
-      date: "20 ABR 2024",
-      time: "22:30",
-      venue: "INDUSTRIAL SPACE",
-      location: "MENDOZA",
-      djs: ["KEVIN BALB", "SPECIAL GUEST"],
-      image: "/placeholder.svg?height=400&width=600",
-      status: "PRÓXIMAMENTE",
+      title: "NEW YEAR SPECIAL",
+      date: "31 DICIEMBRE 2024",
+      location: "GRAND VENUE",
+      time: "20:00 - 06:00",
+      capacity: "800 PERSONAS",
+      artists: ["KEVIN BALB", "SPECIAL GUEST"],
+      image: "/images/event4.jpg",
+      ticketPrice: "€50",
+      description: "Celebración especial de año nuevo con música electrónica de alta calidad.",
+    },
+  ]
+
+  const upcomingEvents = [
+    {
+      id: 5,
+      title: "SPRING BEATS",
+      date: "15 MARZO 2025",
+      location: "OUTDOOR VENUE",
+      time: "16:00 - 02:00",
+      capacity: "1000 PERSONAS",
+      artists: ["ALEX RIVERA", "BALTA", "KEVIN BALB"],
+      image: "/images/event5.jpg",
+      ticketPrice: "€35",
+      description: "Festival al aire libre con los mejores beats de la temporada.",
+    },
+    {
+      id: 6,
+      title: "SUMMER VIBES",
+      date: "20 JULIO 2025",
+      location: "BEACH CLUB",
+      time: "18:00 - 04:00",
+      capacity: "600 PERSONAS",
+      artists: ["KEVIN BALB", "ALEX RIVERA"],
+      image: "/images/event6.jpg",
+      ticketPrice: "€40",
+      description: "Vibraciones de verano con música electrónica y ambiente playero.",
     },
   ]
 
@@ -74,31 +106,10 @@ export default function EventosPage() {
 
   return (
     <div className="min-h-screen bg-[#181313] text-[#D4CFBC]">
-      {/* Header */}
-      <header className="flex items-center justify-between p-6 lg:p-8">
-        <div className="flex items-center">
-          <Link href="/">
-            <Image src="/images/nextstage-logo.png" alt="NEXTSTAGE" width={120} height={40} className="h-8 w-auto" />
-          </Link>
-        </div>
-        <nav className="hidden md:flex items-center space-x-8">
-          <Link href="/" className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors">
-            INICIO
-          </Link>
-          <Link href="/eventos" className="text-sm font-medium tracking-wider uppercase text-white">
-            EVENTOS
-          </Link>
-          <Link href="/djs" className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors">
-            DJS
-          </Link>
-          <Link
-            href="/#contacto"
-            className="text-sm font-medium tracking-wider uppercase hover:text-white transition-colors"
-          >
-            CONTACTO
-          </Link>
-        </nav>
-      </header>
+      <SharedNavbar currentPage="eventos" />
+      
+      {/* Spacer for fixed navbar */}
+      <div className="h-16"></div>
 
       {/* Hero Section */}
       <section className="px-6 lg:px-8 py-12 relative">
@@ -154,39 +165,39 @@ export default function EventosPage() {
             <div className="relative">
               <div className="aspect-[4/3] bg-[#2a2424] rounded-lg overflow-hidden">
                 <Image
-                  src={featuredEvent.image || "/placeholder.svg"}
-                  alt={featuredEvent.title}
+                  src={featuredEvents[0].image || "/placeholder.svg"}
+                  alt={featuredEvents[0].title}
                   width={1200}
                   height={800}
                   className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700"
                 />
               </div>
               <div className="absolute top-4 right-4 bg-[#D4CFBC] text-[#181313] px-4 py-2 text-xs font-bold tracking-wider uppercase">
-                {featuredEvent.status}
+                {featuredEvents[0].ticketPrice}
               </div>
             </div>
 
             <div className="space-y-8">
               <div>
-                <h3 className="text-4xl lg:text-5xl font-bold tracking-tight uppercase mb-4">{featuredEvent.title}</h3>
+                <h3 className="text-4xl lg:text-5xl font-bold tracking-tight uppercase mb-4">{featuredEvents[0].title}</h3>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <Calendar className="w-5 h-5" />
-                    <span className="text-lg tracking-wide">{featuredEvent.date}</span>
+                    <span className="text-lg tracking-wide">{featuredEvents[0].date}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Clock className="w-5 h-5" />
-                    <span className="text-lg tracking-wide">{featuredEvent.time} HS</span>
+                    <span className="text-lg tracking-wide">{featuredEvents[0].time}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <MapPin className="w-5 h-5" />
                     <span className="text-lg tracking-wide">
-                      {featuredEvent.venue} - {featuredEvent.location}
+                      {featuredEvents[0].location}
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Users className="w-5 h-5" />
-                    <span className="text-lg tracking-wide">{featuredEvent.djs.join(" / ")}</span>
+                    <span className="text-lg tracking-wide">{featuredEvents[0].artists.join(" / ")}</span>
                   </div>
                 </div>
               </div>
@@ -227,7 +238,7 @@ export default function EventosPage() {
                     />
                   </div>
                   <div className="absolute top-4 right-4 bg-[#D4CFBC] text-[#181313] px-3 py-1 text-xs font-bold tracking-wider uppercase">
-                    {event.status}
+                    {event.ticketPrice}
                   </div>
                 </div>
 
@@ -240,18 +251,18 @@ export default function EventosPage() {
                     <div className="flex items-center space-x-2">
                       <Calendar className="w-4 h-4" />
                       <span>
-                        {event.date} - {event.time} HS
+                        {event.date} - {event.time}
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <MapPin className="w-4 h-4" />
                       <span>
-                        {event.venue} - {event.location}
+                        {event.location}
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Users className="w-4 h-4" />
-                      <span>{event.djs.join(" / ")}</span>
+                      <span>{event.artists.join(" / ")}</span>
                     </div>
                   </div>
 
@@ -321,6 +332,7 @@ export default function EventosPage() {
       </section>
 
       <SharedContactFooter />
+      <ScrollToTop />
     </div>
   )
 }

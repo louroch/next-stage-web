@@ -6,7 +6,6 @@ import {
   Play,
   Instagram,
   Facebook,
-  Twitter,
   Music,
   ExternalLink,
   ArrowLeft,
@@ -15,14 +14,17 @@ import {
   ArrowUpRight,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react"
+  WhatsApp,
+  Linktree,
+} from "@/components/ui/icons"
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect } from "react"
+import SharedNavbar from "@/components/shared-navbar"
+import ScrollToTop from "@/components/scroll-to-top"
 
 export default function ArtistProfile() {
   const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("bio")
 
   const artistData = {
@@ -70,102 +72,10 @@ export default function ArtistProfile() {
 
   return (
     <div className="min-h-screen bg-[#181313] text-[#D4CFBC] font-sans">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-30 bg-[#181313]/95 backdrop-blur-sm border-b border-[#D4CFBC]/10">
-        <div className="flex items-center justify-between p-4 sm:p-6 lg:p-8">
-          <div className="flex items-center space-x-6">
-            <Link href="/" className="w-24 sm:w-28 lg:w-32">
-              <Image
-                src="/images/nextstage-logo-alt.png"
-                alt="NEXTSTAGE"
-                width={128}
-                height={32}
-                className="w-full h-auto"
-              />
-            </Link>
-            <Link
-              href="/"
-              className="hidden lg:flex items-center space-x-2 text-xs tracking-[0.2em] uppercase hover:text-white transition-colors duration-500"
-            >
-              <ArrowLeft size={14} />
-              <span>VOLVER</span>
-            </Link>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex space-x-8 text-xs font-medium tracking-[0.2em] uppercase">
-            <Link href="/#inicio" className="hover:text-white transition-all duration-500 relative group">
-              INICIO
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#D4CFBC] transition-all duration-500 group-hover:w-full"></span>
-            </Link>
-            <Link href="/events" className="hover:text-white transition-all duration-500 relative group">
-              EVENTOS
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#D4CFBC] transition-all duration-500 group-hover:w-full"></span>
-            </Link>
-            <Link href="/#djs" className="hover:text-white transition-all duration-500 relative group">
-              DJS
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#D4CFBC] transition-all duration-500 group-hover:w-full"></span>
-            </Link>
-            <Link href="/#contacto" className="hover:text-white transition-all duration-500 relative group">
-              CONTACTO
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#D4CFBC] transition-all duration-500 group-hover:w-full"></span>
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden z-[100] relative"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </header>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-[#181313] z-[90] lg:hidden">
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            className="absolute top-8 right-8 w-12 h-12 rounded-full border border-[#D4CFBC] flex items-center justify-center hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-300"
-            aria-label="Close menu"
-          >
-            <ArrowLeft size={20} />
-          </button>
-
-          <div className="flex flex-col items-center justify-center h-full space-y-6 sm:space-y-8 text-lg sm:text-xl font-medium tracking-[0.2em] uppercase">
-            <Link
-              href="/#inicio"
-              onClick={() => setIsMenuOpen(false)}
-              className="hover:text-white transition-colors duration-300"
-            >
-              INICIO
-            </Link>
-            <Link
-              href="/events"
-              onClick={() => setIsMenuOpen(false)}
-              className="hover:text-white transition-colors duration-300"
-            >
-              EVENTOS
-            </Link>
-            <Link
-              href="/#djs"
-              onClick={() => setIsMenuOpen(false)}
-              className="hover:text-white transition-colors duration-300"
-            >
-              DJS
-            </Link>
-            <Link
-              href="/#contacto"
-              onClick={() => setIsMenuOpen(false)}
-              className="hover:text-white transition-colors duration-300"
-            >
-              CONTACTO
-            </Link>
-          </div>
-        </div>
-      )}
+      <SharedNavbar currentPage="artist" />
+      
+      {/* Spacer for fixed navbar */}
+      <div className="h-16"></div>
 
       {/* Hero Section - Full Screen */}
       <section className="relative h-screen overflow-hidden">
@@ -185,7 +95,7 @@ export default function ArtistProfile() {
               {/* Left Side - Artist Info */}
               <div className="space-y-8">
                 <div className="flex items-center justify-between mb-6">
-                  <span className="text-xs tracking-[0.3em] opacity-70 uppercase">DJS</span>
+                  <span className="text-xs tracking-[0.3em] opacity-70 uppercase">ARTISTAS</span>
                   <span className="text-xs tracking-[0.2em] opacity-70">{artistData.number}</span>
                 </div>
 
@@ -495,8 +405,8 @@ export default function ArtistProfile() {
                 <Link href="/events" className="block hover:text-white transition-colors duration-500">
                   EVENTOS
                 </Link>
-                <Link href="/#djs" className="block hover:text-white transition-colors duration-500">
-                  DJS
+                <Link href="/#artistas" className="block hover:text-white transition-colors duration-500">
+                  ARTISTAS
                 </Link>
                 <Link href="/#contacto" className="block hover:text-white transition-colors duration-500">
                   CONTACTO
@@ -518,22 +428,36 @@ export default function ArtistProfile() {
               <h4 className="font-bold tracking-[0.1em] mb-6 uppercase text-sm">REDES</h4>
               <div className="flex space-x-4">
                 <Link
-                  href="#"
+                  href="https://www.instagram.com/nextstage.ar"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
                 >
                   <Instagram size={16} className="group-hover:scale-110 transition-transform duration-500" />
                 </Link>
                 <Link
-                  href="#"
+                  href="https://www.facebook.com/nextstage.ar/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
                 >
                   <Facebook size={16} className="group-hover:scale-110 transition-transform duration-500" />
                 </Link>
                 <Link
-                  href="#"
+                  href="https://api.whatsapp.com/send?phone=543814781887&fbclid=PAQ0xDSwMHJ4RleHRuA2FlbQIxMAABpyOa7Qbzrla0GeMDiu2OnqYFLcO-fuZr-STK5WujO06HZdCiIJH4Ch9vZOnQ_aem_yETdk4r4lbOX0JCQmBa_Mg"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
                 >
-                  <Twitter size={16} className="group-hover:scale-110 transition-transform duration-500" />
+                  <WhatsApp size={16} className="group-hover:scale-110 transition-transform duration-500" />
+                </Link>
+                <Link
+                  href="https://linktr.ee/nextstagebooking?fbclid=PAQ0xDSwMHJ8NleHRuA2FlbQIxMQABp-sX24PSxrDsX9ys4K19lwV3lxxs8eM713XriVJtc0AAkj0vMFZwEbql4bNV_aem_bFaHlJnhABHk82i2S54Mzg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
+                >
+                  <Linktree size={16} className="group-hover:scale-110 transition-transform duration-500" />
                 </Link>
               </div>
             </div>
@@ -554,6 +478,7 @@ export default function ArtistProfile() {
           </div>
         </div>
       </footer>
+      <ScrollToTop />
     </div>
   )
 }
