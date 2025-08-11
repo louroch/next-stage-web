@@ -127,12 +127,34 @@ export default function HomePage() {
     setCurrentEventIndex((prev) => (prev - 1 + events.length) % events.length)
   }
 
+  const getDJTransform = () => {
+    if (windowWidth && windowWidth >= 1024) {
+      // Desktop: 3 artistas por vista, cada uno ocupa 33.333%
+      return `translateX(-${currentDJIndex * 33.333}%)`
+    } else {
+      // Mobile: 1 artista por vista, cada uno ocupa 100%
+      return `translateX(-${currentDJIndex * 100}%)`
+    }
+  }
+
   const nextDJ = () => {
-    setCurrentDJIndex((prev) => (prev + 1) % artists.length)
+    if (windowWidth && windowWidth >= 1024) {
+      // Desktop: mostrar 3 artistas, avanzar de 3 en 3
+      setCurrentDJIndex((prev) => Math.min(prev + 3, artists.length - 3))
+    } else {
+      // Mobile: mostrar 1 artista, avanzar de 1 en 1
+      setCurrentDJIndex((prev) => (prev + 1) % artists.length)
+    }
   }
 
   const prevDJ = () => {
-    setCurrentDJIndex((prev) => (prev - 1 + artists.length) % artists.length)
+    if (windowWidth && windowWidth >= 1024) {
+      // Desktop: mostrar 3 artistas, retroceder de 3 en 3
+      setCurrentDJIndex((prev) => Math.max(prev - 3, 0))
+    } else {
+      // Mobile: mostrar 1 artista, retroceder de 1 en 1
+      setCurrentDJIndex((prev) => (prev - 1 + artists.length) % artists.length)
+    }
   }
 
   return (
@@ -447,10 +469,15 @@ export default function HomePage() {
             >
               <div
                 className="flex transition-transform duration-700 ease-out"
-                style={{ transform: `translateX(-${currentDJIndex * 100}%)` }}
+                style={{ 
+                  transform: getDJTransform() 
+                }}
               >
                 {artists.map((artist, index) => (
-                  <div key={artist.id} className="w-full flex-shrink-0 px-2 lg:px-4">
+                  <div 
+                    key={artist.id} 
+                    className="w-full lg:w-1/3 flex-shrink-0 px-2 lg:px-4"
+                  >
                     <Link href={`/djs/${artist.slug}`} className="group cursor-pointer">
                       <div className="relative overflow-hidden rounded-lg bg-[#2a2424]/50 border border-[#D4CFBC]/20 group-hover:border-[#D4CFBC] transition-all duration-500">
                         <div className="aspect-[4/5] relative overflow-hidden">
@@ -462,8 +489,8 @@ export default function HomePage() {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                         </div>
-                        <div className="p-6">
-                          <h3 className="text-xl font-bold tracking-[0.1em] uppercase mb-2 text-[#D4CFBC] group-hover:text-white transition-colors duration-300">
+                        <div className="p-4 lg:p-6">
+                          <h3 className="text-lg lg:text-xl font-bold tracking-[0.1em] uppercase mb-2 text-[#D4CFBC] group-hover:text-white transition-colors duration-300">
                             {artist.name}
                           </h3>
                           <span className="text-xs tracking-[0.2em] opacity-70 uppercase">ARTISTAS</span>
