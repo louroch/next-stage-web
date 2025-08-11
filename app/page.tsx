@@ -128,19 +128,20 @@ export default function HomePage() {
   }
 
   const getDJTransform = () => {
-    if (windowWidth && windowWidth >= 1024) {
-      // Desktop: 3 artistas por vista, cada uno ocupa 33.333%
-      return `translateX(-${currentDJIndex * 33.333}%)`
-    } else {
+    // Si windowWidth no está disponible, usar mobile por defecto
+    if (!windowWidth || windowWidth < 1024) {
       // Mobile: 1 artista por vista, cada uno ocupa 100%
       return `translateX(-${currentDJIndex * 100}%)`
+    } else {
+      // Desktop: 3 artistas por vista, cada uno ocupa 33.333%
+      return `translateX(-${currentDJIndex * 33.333}%)`
     }
   }
 
   const nextDJ = () => {
     if (windowWidth && windowWidth >= 1024) {
       // Desktop: mostrar 3 artistas, avanzar de 3 en 3
-      setCurrentDJIndex((prev) => Math.min(prev + 3, artists.length - 3))
+      setCurrentDJIndex((prev) => Math.min(prev + 3, Math.max(0, artists.length - 3)))
     } else {
       // Mobile: mostrar 1 artista, avanzar de 1 en 1
       setCurrentDJIndex((prev) => (prev + 1) % artists.length)
