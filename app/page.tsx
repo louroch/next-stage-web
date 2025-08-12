@@ -69,25 +69,25 @@ export default function HomePage() {
     {
       id: "01",
       name: "DANI LEÓN",
-      image: "/placeholder.svg?height=500&width=400",
+      image: "/images/dani-leon.webp",
       slug: "dani-leon",
     },
     {
       id: "02",
       name: "BALTA",
-      image: "/placeholder.svg?height=500&width=400",
+      image: "/images/balta.webp",
       slug: "balta",
     },
     {
       id: "03",
       name: "KEVIN BALBI",
-      image: "/placeholder.svg?height=500&width=400",
+      image: "/images/kevin-balbi.webp",
       slug: "kevin-balbi",
     },
     {
       id: "04",
       name: "UNUSUAL SOUL",
-      image: "/placeholder.svg?height=500&width=400",
+      image: "/images/unusual-soul.webp",
       slug: "unusual-soul",
     },
   ]

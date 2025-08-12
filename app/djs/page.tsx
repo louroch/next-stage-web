@@ -20,7 +20,7 @@ export default function ArtistsListingPage() {
       genres: ["ORGANIC HOUSE", "MELODIC TECHNO", "PROGRESSIVE"],
       description:
         "Médico cirujano y artista sonoro. Su propuesta se mueve entre el organic house, melodic-techno y progressive, con la intención de sanar a través de la música.",
-      image: "/placeholder.svg?height=600&width=600&text=Dani+León",
+      image: "/images/dani-leon.webp",
       specialty: "Sanador y Energético",
     },
     {
@@ -29,7 +29,7 @@ export default function ArtistsListingPage() {
       genres: ["INDIE DANCE", "PROGRESSIVE", "MELODIC TECHNO"],
       description:
         "DJ y productor originario de Tucumán. Versátil artista que se adapta a cualquier género, especializado en indie dance, progressive house y melodic techno.",
-      image: "/placeholder.svg?height=600&width=600&text=Balta",
+      image: "/images/balta.webp",
       specialty: "Grooves Envolventes",
     },
     {
@@ -38,7 +38,7 @@ export default function ArtistsListingPage() {
       genres: ["TECH HOUSE", "UK GARAGE", "DEEP HOUSE"],
       description:
         "DJ y productor tucumano que hace del house su idioma. Sus sets son viajes musicales que recorren el Tech House, UK Garage, Deep y Minimal House.",
-      image: "/placeholder.svg?height=600&width=600&text=Kevin+Balbi",
+      image: "/images/kevin-balbi.webp",
       specialty: "House Energy",
     },
     {
@@ -47,7 +47,7 @@ export default function ArtistsListingPage() {
       genres: ["ELECTRONIC", "AMBIENT", "EXPERIMENTAL"],
       description:
         "Artista electrónico que explora los límites del sonido. Su música trasciende géneros tradicionales creando experiencias únicas y envolventes.",
-      image: "/placeholder.svg?height=600&width=600&text=Unusual+Soul",
+      image: "/images/unusual-soul.webp",
       specialty: "Experiencias Sonoras",
     },
   ]

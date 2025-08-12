@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-import { specialGothic, timmana, roboto, inter } from '@/lib/fonts'
+import { specialGothic, timmana, roboto, inter, oswald } from '@/lib/fonts'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -23,6 +23,7 @@ html {
   font-family: ${roboto.style.fontFamily};
   --font-special-gothic: ${specialGothic.variable};
   --font-timmana: ${timmana.variable};
+  --font-oswald: ${oswald.variable};
   --font-roboto: ${roboto.variable};
   --font-inter: ${inter.variable};
   --font-sans: ${GeistSans.variable};
@@ -30,7 +31,7 @@ html {
 }
         `}</style>
       </head>
-      <body className={`${roboto.variable} ${inter.variable}`}>
+      <body className={`${roboto.variable} ${inter.variable} ${timmana.variable} ${oswald.variable}`}>
         {children}
       </body>
     </html>

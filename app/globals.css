@@ -8,6 +8,18 @@
   }
   
   /* Clases de fuentes personalizadas */
+  .font-title {
+    font-family: var(--font-oswald), var(--font-inter), Inter, system-ui, sans-serif;
+  }
+
+  .font-subtitle {
+    font-family: var(--font-timmana), var(--font-oswald), var(--font-inter), Inter, system-ui, sans-serif;
+  }
+
+  .font-body {
+    font-family: var(--font-roboto), var(--font-inter), Inter, system-ui, sans-serif;
+  }
+
   .font-special-gothic {
     font-family: var(--font-special-gothic), var(--font-inter), Inter, system-ui, sans-serif;
   }

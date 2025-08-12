@@ -31,7 +31,7 @@ const djsData: Record<string, DJData> = {
   "dani-leon": {
     name: "DANI LEÓN",
     genres: ["ORGANIC HOUSE", "MELODIC TECHNO", "PROGRESSIVE"],
-    image: "/placeholder.svg?height=600&width=600&text=Dani+León",
+    image: "/images/dani-leon.webp",
     shortBio: "Médico cirujano desde hace más de 30 años, y artista sonoro por vocación.",
     fullBio: [
       "Hay quienes curan con medicina. Otros, con música. Y hay quienes, como él, logran unir ambos caminos.",
@@ -58,7 +58,7 @@ const djsData: Record<string, DJData> = {
   balta: {
     name: "BALTA",
     genres: ["INDIE DANCE", "PROGRESSIVE", "MELODIC TECHNO"],
-    image: "/placeholder.svg?height=600&width=600&text=Balta",
+    image: "/images/balta.webp",
     shortBio:
       "DJ y productor originario de Tucumán, encuentra en los sonidos melódicos su forma de expresión más auténtica.",
     fullBio: [
@@ -77,7 +77,7 @@ const djsData: Record<string, DJData> = {
   "kevin-balbi": {
     name: "KEVIN BALBI",
     genres: ["TECH HOUSE", "UK GARAGE", "DEEP HOUSE"],
-    image: "/placeholder.svg?height=600&width=600&text=Kevin+Balbi",
+    image: "/images/kevin-balbi.webp",
     shortBio: "DJ y productor tucumano que hace del house su idioma y del groove su pasaporte.",
     fullBio: [
       "Kevin Balbi no solo pone música, crea escenarios donde el ritmo manda. DJ y productor tucumano, hace del house su idioma y del groove su pasaporte. Sus sets son viajes musicales que recorren El Tech House, el UK Garage, el Deep y el Minimal House.",
@@ -94,7 +94,7 @@ const djsData: Record<string, DJData> = {
   "unusual-soul": {
     name: "UNUSUAL SOUL",
     genres: ["ELECTRONIC", "AMBIENT", "EXPERIMENTAL"],
-    image: "/placeholder.svg?height=600&width=600&text=Unusual+Soul",
+    image: "/images/unusual-soul.webp",
     shortBio: "Artista electrónico que explora los límites del sonido y crea experiencias únicas.",
     fullBio: [
       "UNUSUAL SOUL es un artista electrónico que trasciende los géneros tradicionales para crear experiencias sonoras únicas y envolventes. Su música es un viaje a través de paisajes sonoros que desafían las convenciones establecidas.",
@@ -176,7 +176,7 @@ export default function DJProfilePage({ params }: { params: Promise<{ slug: stri
               </div>
 
               {/* Social Media */}
-              <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-6 mb-8">
                 {dj.socialLinks?.instagram && (
                   <Link
                     href={dj.socialLinks.instagram}

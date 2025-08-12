@@ -1,4 +1,4 @@
-import { Inter, Roboto } from 'next/font/google'
+import { Inter, Roboto, Oswald, Timmana } from 'next/font/google'
 
 // Fuente para cuerpo de texto - Roboto
 export const roboto = Roboto({
@@ -15,13 +15,24 @@ export const inter = Inter({
   display: 'swap',
 })
 
-// Fuentes personalizadas con fallback a Inter
+// Oswald para títulos/subtítulos
+export const oswald = Oswald({
+  subsets: ['latin'],
+  weight: ['200', '300', '400', '500', '600', '700'],
+  variable: '--font-oswald',
+  display: 'swap',
+})
+
+// Timmana para subtítulos
+export const timmana = Timmana({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-timmana',
+  display: 'swap',
+})
+
+// Fuentes personalizadas con fallback a Inter (Special Gothic Expanded One)
 export const specialGothic = {
   variable: '--font-special-gothic',
-  style: { fontFamily: 'var(--font-inter), Inter, system-ui, sans-serif' }
-}
-
-export const timmana = {
-  variable: '--font-timmana',
   style: { fontFamily: 'var(--font-inter), Inter, system-ui, sans-serif' }
 }
