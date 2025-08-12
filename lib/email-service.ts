@@ -52,11 +52,12 @@ class EmailService {
 
     try {
       const mailOptions = {
-        from: emailData.from || process.env.CONTACT_EMAIL || 'nextstagebooking@gmail.com',
+        from: emailData.from || process.env.GMAIL_USER || process.env.CONTACT_EMAIL || 'nextstagebooking@gmail.com',
         to: emailData.to,
         subject: emailData.subject,
         html: emailData.html,
-        text: emailData.text
+        text: emailData.text,
+        replyTo: emailData.from || process.env.CONTACT_EMAIL || process.env.GMAIL_USER
       }
 
       const result = await this.transporter.sendMail(mailOptions)

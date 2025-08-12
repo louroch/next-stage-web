@@ -151,16 +151,13 @@ export default function ArtistsListingPage() {
         </div>
       </section>
 
-      {/* Call to Action */}
+      {/* Call to Action (sin botón, el formulario está debajo) */}
       <section className="px-6 lg:px-8 py-16 border-t border-[#2a2424]">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold tracking-wider uppercase mb-8">¿BUSCAS TALENTO PARA TU EVENTO?</h2>
-          <p className="text-lg opacity-90 mb-8">
+          <h2 className="text-3xl font-bold tracking-wider uppercase mb-6">¿BUSCAS TALENTO PARA TU EVENTO?</h2>
+          <p className="text-lg opacity-90">
             Conectemos y llevemos tu evento al siguiente nivel con nuestros artistas.
           </p>
-          <Button className="bg-[#D4CFBC] text-[#181313] hover:bg-white px-12 py-6 text-sm font-medium tracking-widest uppercase rounded-none transition-all duration-300">
-            CONTACTAR AHORA
-          </Button>
         </div>
       </section>
 
