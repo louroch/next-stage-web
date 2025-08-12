@@ -84,6 +84,12 @@ export default function HomePage() {
       image: "/placeholder.svg?height=500&width=400",
       slug: "kevin-balbi",
     },
+    {
+      id: "04",
+      name: "UNUSUAL SOUL",
+      image: "/placeholder.svg?height=500&width=400",
+      slug: "unusual-soul",
+    },
   ]
 
   const handleMouseDown = (e: React.MouseEvent, carouselRef: React.RefObject<HTMLDivElement | null>) => {

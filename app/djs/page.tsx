@@ -41,6 +41,15 @@ export default function ArtistsListingPage() {
       image: "/placeholder.svg?height=600&width=600&text=Kevin+Balbi",
       specialty: "House Energy",
     },
+    {
+      slug: "unusual-soul",
+      name: "UNUSUAL SOUL",
+      genres: ["ELECTRONIC", "AMBIENT", "EXPERIMENTAL"],
+      description:
+        "Artista electrónico que explora los límites del sonido. Su música trasciende géneros tradicionales creando experiencias únicas y envolventes.",
+      image: "/placeholder.svg?height=600&width=600&text=Unusual+Soul",
+      specialty: "Experiencias Sonoras",
+    },
   ]
 
   return (

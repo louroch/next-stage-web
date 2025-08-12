@@ -4,13 +4,30 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import SharedContactFooter from "@/components/shared-contact-footer"
-import { Instagram, Facebook, Music, Play, ExternalLink, Calendar, ArrowLeft } from "@/components/ui/icons"
+import { Instagram, Facebook, Music, Play, ExternalLink, Calendar, ArrowLeft, YouTube, Spotify, Linktree } from "@/components/ui/icons"
 import { use } from "react"
 import { notFound } from "next/navigation"
 import SharedNavbar from "@/components/shared-navbar"
 import ScrollToTop from "@/components/scroll-to-top"
 
-const djsData = {
+interface SocialLinks {
+  instagram?: string
+  spotify?: string
+  youtube?: string
+  linktree?: string
+}
+
+interface DJData {
+  name: string
+  genres: string[]
+  image: string
+  shortBio: string
+  fullBio: string[]
+  collaborations: string[]
+  socialLinks?: SocialLinks
+}
+
+const djsData: Record<string, DJData> = {
   "dani-leon": {
     name: "DANI LEÓN",
     genres: ["ORGANIC HOUSE", "MELODIC TECHNO", "PROGRESSIVE"],
@@ -34,6 +51,9 @@ const djsData = {
       "Pampa",
       "Antrim",
     ],
+    socialLinks: {
+      instagram: "https://www.instagram.com/danielleon5?igsh=MTAwdGlqOWU0Z2xiOQ==",
+    },
   },
   balta: {
     name: "BALTA",
@@ -48,6 +68,11 @@ const djsData = {
       "Actualmente, BALTA continúa expandiendo su identidad musical a través de su primer track y su primera creación audiovisual, ambos desarrollados bajo su propia productora: Green Groove.",
     ],
     collaborations: ["Nacho Khan", "Luciano Le Bihan", "LeandroCor", "SHAI T", "Valdovinos"],
+    socialLinks: {
+      instagram: "https://www.instagram.com/balta.dj",
+      linktree: "https://linktr.ee/balta.dj?fbclid=PAQ0xDSwMIdjhleHRuA2FlbQIxMQABp_QQKDugkWIX29IKtZG5b68F67-YPM9m3Nm-0b38nDIQm8RdSHvHkG6YpOV8_aem_3CyafQwf7iDmIgcDthkafA",
+      youtube: "https://m.youtube.com/@BALTAMusicc?fbclid=PAQ0xDSwMIdk1leHRuA2FlbQIxMAABpwtDED1X2-_wELJ8Kxuk5YVELsKtuDK5rC7Y9vJujE8NVyb-6RQ9skJEg8-N_aem_yodPWxtvFjY24giyRJTeow",
+    },
   },
   "kevin-balbi": {
     name: "KEVIN BALBI",
@@ -61,6 +86,27 @@ const djsData = {
       "Con una trayectoria breve pero intensa, Kevin ya dejó huella en escenarios como Boris, Casa Croix, Brucks, Symbiosis y Secret Garden. En este último, sorprendió con su primer set de Afro House, sumando un nuevo color a su propuesta.",
     ],
     collaborations: ["Daniel León", "Green Groove Collective"],
+    socialLinks: {
+      instagram: "https://www.instagram.com/kevinbalbi.music?igsh=enRxZnF0MWRlM3o3",
+      youtube: "https://m.youtube.com/@kevinbalbimusic?fbclid=PAQ0xDSwMIdo1leHRuA2FlbQIxMAABp5eUv5WFqhzCheC2nMe0w-Y432rKsfAG8V7SNOxEQrpWwug5acPCT5Yko0td_aem_GjH74lrZDWT-NhZNYY-H7w",
+    },
+  },
+  "unusual-soul": {
+    name: "UNUSUAL SOUL",
+    genres: ["ELECTRONIC", "AMBIENT", "EXPERIMENTAL"],
+    image: "/placeholder.svg?height=600&width=600&text=Unusual+Soul",
+    shortBio: "Artista electrónico que explora los límites del sonido y crea experiencias únicas.",
+    fullBio: [
+      "UNUSUAL SOUL es un artista electrónico que trasciende los géneros tradicionales para crear experiencias sonoras únicas y envolventes. Su música es un viaje a través de paisajes sonoros que desafían las convenciones establecidas.",
+      "Con un enfoque experimental y vanguardista, UNUSUAL SOUL combina elementos de ambient, electronic y música experimental para crear composiciones que van más allá del entretenimiento, convirtiéndose en experiencias sensoriales completas.",
+      "Su propuesta artística se caracteriza por la búsqueda constante de nuevos sonidos y la exploración de las posibilidades expresivas de la música electrónica. Cada track es una invitación a sumergirse en universos sonoros únicos.",
+      "Actualmente, UNUSUAL SOUL continúa expandiendo los límites de su creatividad, desarrollando proyectos que combinan música, tecnología y arte visual para crear experiencias inmersivas que trascienden lo convencional.",
+    ],
+    collaborations: ["Artistas experimentales", "Colectivos underground", "Festivales alternativos"],
+    socialLinks: {
+      spotify: "https://open.spotify.com/intl-es/artist/6YBBrivtOKECLloC5BnCwF?si=VAt39HGHTcOr--FRzOnSNA&nd=1&utm_medium=organic&product=open&%24full_url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F6YBBrivtOKECLloC5BnCwF%3Fsi%3DVAt39HGHTcOr--FRzOnSNA&%24android_redirect_timeout=3000&feature=organic&_branch_match_id=1483899023354337287&_branch_referrer=H4sIAAAAAAAAA72NwUrEMBRFvybdTVsbHVAI0lbriGJBRXBVMknaeUyahJcXB1347baCvyDcxeUeLudAFOJVUcTgCcbPXIaQW3DH4jqg10mR8MG4jFXnY7J2SGjFYb0wXrOqW7Li%2FO%2Bt%2FLxMEgkiLWX73jQIH9Q%2F3LaP1rcXjWtPHeNdBMZv3mril7u73avqcbPpnr969%2FJU%2F6qktXupjv%2BgY9XW6YWerV7pNHrQAxoNaBQNBLPxiQQvyzIbjaSERnicpAOVfaMZDSK4adijP0WD4t5FkhPK%2BQediOnNVwEAAA%3D%3D&fbclid=PAQ0xDSwMIdtBleHRuA2FlbQIxMAABp2ETLFnjldJH6D9o9np0pSsAqOwgvGdlZhsctPXqeg5acPCT5Yko0td_aem_pFjVuFD2i4nB7aBjXBm1rA",
+      instagram: "https://www.instagram.com/unusualsoul.music?igsh=MXU1c3QwZHNmbm11Zw==",
+    },
   },
 }
 
@@ -131,41 +177,59 @@ export default function DJProfilePage({ params }: { params: Promise<{ slug: stri
 
               {/* Social Media */}
               <div className="flex items-center space-x-6">
-                <Link
-                  href="https://www.instagram.com/nextstage.ar"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
-                >
-                  <Instagram size={16} className="group-hover:scale-110 transition-transform duration-500" />
-                </Link>
-                <Link
-                  href="https://www.facebook.com/nextstage.ar/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
-                >
-                  <Facebook size={16} className="group-hover:scale-110 transition-transform duration-500" />
-                </Link>
-                <Link
-                  href="#"
-                  className="w-12 h-12 border border-[#D4CFBC] rounded-full flex items-center justify-center hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-300 group"
-                >
-                  <Music className="w-5 h-5" />
-                </Link>
-                <Link
-                  href="#"
-                  className="w-12 h-12 border border-[#D4CFBC] rounded-full flex items-center justify-center hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-300 group"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                </Link>
+                {dj.socialLinks?.instagram && (
+                  <Link
+                    href={dj.socialLinks.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
+                    title="Instagram"
+                  >
+                    <Instagram size={16} className="group-hover:scale-110 transition-transform duration-500" />
+                  </Link>
+                )}
+                {dj.socialLinks?.spotify && (
+                  <Link
+                    href={dj.socialLinks.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
+                    title="Spotify"
+                  >
+                    <Spotify size={16} className="group-hover:scale-110 transition-transform duration-500" />
+                  </Link>
+                )}
+                {dj.socialLinks?.youtube && (
+                  <Link
+                    href={dj.socialLinks.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
+                    title="YouTube"
+                  >
+                    <YouTube size={16} className="group-hover:scale-110 transition-transform duration-500" />
+                  </Link>
+                )}
+                {dj.socialLinks?.linktree && (
+                  <Link
+                    href={dj.socialLinks.linktree}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"
+                    title="Linktree"
+                  >
+                    <Linktree size={16} className="group-hover:scale-110 transition-transform duration-500" />
+                  </Link>
+                )}
               </div>
 
               {/* Booking Button */}
-              <Button className="bg-[#D4CFBC] text-[#181313] hover:bg-white px-8 py-6 text-sm font-medium tracking-widest uppercase rounded-none transition-all duration-300">
-                <Calendar className="w-4 h-4 mr-2" />
-                BOOKING
-              </Button>
+              <Link href="/#contacto">
+                <Button className="bg-[#D4CFBC] text-[#181313] hover:bg-white px-8 py-6 text-sm font-medium tracking-widest uppercase rounded-none transition-all duration-300">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  BOOKING
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
