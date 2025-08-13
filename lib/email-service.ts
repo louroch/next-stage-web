@@ -18,7 +18,7 @@ class EmailService {
   private isInitialized = false
 
   constructor() {
-    this.initializeGmail()
+    // Lazy initialization: we'll initialize the transporter only when needed at runtime
   }
 
   private async initializeGmail() {
