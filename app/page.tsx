@@ -160,11 +160,13 @@ export default function HomePage() {
               fill
               className={`object-cover transition-opacity duration-700 ease-in-out ${
                 index === 5
-                  ? "object-[25%_60%] md:object-center" // encabezado 6 mobile: un poco más de top y margen derecho
+                  ? "object-[40%_60%] md:object-center" // encabezado 6: más a la derecha, top igual
                   : index === 4
                   ? "object-[90%_50%] md:object-center" // encabezado 5: más a la derecha en mobile
+                  : index === 0
+                  ? "object-[80%_70%] md:object-center" // encabezado 1: más top en mobile
                   : "object-[80%_50%] md:object-center"
-              } ${index === currentHeroIndex ? "opacity-100" : "opacity-0"}`}
+               } ${index === currentHeroIndex ? "opacity-100" : "opacity-0"}`}
               priority={index === 0}
             />
           ))}
