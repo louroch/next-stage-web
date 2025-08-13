@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Menu, X, ChevronLeft, ChevronRight, Play, ArrowLeft } from "@/components/ui/icons"
+import { Menu, X, ChevronLeft, ChevronRight, Play, ArrowLeft, Instagram, Facebook, Linktree } from "@/components/ui/icons"
 import SharedContactFooter from "@/components/shared-contact-footer"
 
 export default function HomePage() {
@@ -39,35 +39,7 @@ export default function HomePage() {
   const [startX, setStartX] = useState(0)
   const [scrollLeft, setScrollLeft] = useState(0)
 
-  const events = [
-    {
-      id: 1,
-      title: "NEXTSTAGE SHOWCASE",
-      date: "15 MAR",
-      location: "BUENOS AIRES",
-      venue: "WAREHOUSE DISTRICT",
-      image: "/placeholder.svg?height=600&width=800",
-      slug: "nextstage-showcase",
-    },
-    {
-      id: 2,
-      title: "UNDERGROUND SESSIONS",
-      date: "22 MAR",
-      location: "CÓRDOBA",
-      venue: "CLUB BASEMENT",
-      image: "/placeholder.svg?height=600&width=800",
-      slug: "underground-sessions",
-    },
-    {
-      id: 3,
-      title: "MELODIC NIGHT",
-      date: "05 ABR",
-      location: "ROSARIO",
-      venue: "ROOFTOP VENUE",
-      image: "/placeholder.svg?height=600&width=800",
-      slug: "melodic-night",
-    },
-  ]
+  const events: Array<any> = []
 
   const artists = [
     {
@@ -188,7 +160,7 @@ export default function HomePage() {
               fill
               className={`object-cover transition-opacity duration-700 ease-in-out ${
                 index === 5
-                  ? "object-[30%_50%] md:object-center" // encabezado 6: énfasis hacia la izquierda en mobile (mitad del ajuste previo)
+                  ? "object-[25%_60%] md:object-center" // encabezado 6 mobile: un poco más de top y margen derecho
                   : index === 4
                   ? "object-[90%_50%] md:object-center" // encabezado 5: más a la derecha en mobile
                   : "object-[80%_50%] md:object-center"
@@ -405,69 +377,98 @@ export default function HomePage() {
           </div>
 
           <div className="relative">
-            <div
-              className="overflow-hidden cursor-grab active:cursor-grabbing"
-              ref={eventCarouselRef}
-              onMouseDown={(e) => handleMouseDown(e, eventCarouselRef)}
-              onMouseMove={(e) => handleMouseMove(e, eventCarouselRef)}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-              onTouchStart={(e) => handleTouchStart(e, eventCarouselRef)}
-              onTouchMove={(e) => handleTouchMove(e, eventCarouselRef)}
-              onTouchEnd={handleMouseUp}
-            >
-              <div
-                className="flex transition-transform duration-700 ease-out"
-                style={{ transform: `translateX(-${currentEventIndex * 100}%)` }}
-              >
-                {events.map((event, index) => (
-                  <div key={event.id} className="w-full flex-shrink-0 px-2 lg:px-4">
-                    <Link href={`/eventos#${event.slug}`}>
-                      <Card className="bg-transparent border border-[#D4CFBC]/20 hover:border-[#D4CFBC] transition-all duration-700 overflow-hidden group cursor-pointer">
-                        <div className="relative h-48 md:h-64 lg:h-80">
-                          <Image
-                            src={event.image || "/placeholder.svg"}
-                            alt={event.title}
-                            fill
-                            className="object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                          <div className="absolute top-4 lg:top-6 right-4 lg:right-6">
-                            <Badge className="bg-[#D4CFBC] text-[#181313] font-bold tracking-[0.1em] uppercase text-xs lg:text-sm">
-                              {event.date}
-                            </Badge>
-                          </div>
-                          <div className="absolute bottom-4 lg:bottom-8 left-4 lg:left-8 right-4 lg:right-8">
-                            <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-[0.1em] mb-2 lg:mb-4 uppercase">
-                              {event.title}
-                            </h3>
-                            <div className="w-full h-px bg-[#D4CFBC] mb-2 lg:mb-4"></div>
-                            <div className="flex items-center justify-between text-xs lg:text-sm opacity-90 tracking-[0.1em] uppercase">
-                              <span>{event.location}</span>
-                              <span>{event.venue}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </Card>
+            {events.length === 0 ? (
+              <div className="border border-[#D4CFBC]/20 p-8 lg:p-12 bg-black/20">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-8 h-8 opacity-80">
+                    <Image src="/images/nextstage-circular-logo-alt.png" alt="NextStage" width={32} height={32} className="w-full h-full object-contain" />
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-title tracking-tight uppercase">NEXTSTAGE</h3>
+                  <div className="flex-1 h-px bg-[#D4CFBC]/60"></div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl md:text-2xl font-title uppercase tracking-[0.1em] mb-2">TO BE ANNOUNCED</div>
+                  <p className="opacity-80 mb-6">seguinos en nuestras redes para mantenerte actualizado</p>
+                  <div className="flex items-center justify-center gap-4">
+                    <Link href="https://www.instagram.com/nextstage.ar" target="_blank" className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all">
+                      <Instagram className="w-5 h-5" />
+                    </Link>
+                    <Link href="https://www.facebook.com/nextstage.ar/" target="_blank" className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all">
+                      <Facebook className="w-5 h-5" />
+                    </Link>
+                    <Link href="https://linktr.ee/nextstagebooking" target="_blank" className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all">
+                      <Linktree className="w-5 h-5" />
                     </Link>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
+            ) : (
+              <>
+                <div
+                  className="overflow-hidden cursor-grab active:cursor-grabbing"
+                  ref={eventCarouselRef}
+                  onMouseDown={(e) => handleMouseDown(e, eventCarouselRef)}
+                  onMouseMove={(e) => handleMouseMove(e, eventCarouselRef)}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseUp}
+                  onTouchStart={(e) => handleTouchStart(e, eventCarouselRef)}
+                  onTouchMove={(e) => handleTouchMove(e, eventCarouselRef)}
+                  onTouchEnd={handleMouseUp}
+                >
+                  <div
+                    className="flex transition-transform duration-700 ease-out"
+                    style={{ transform: `translateX(-${currentEventIndex * 100}%)` }}
+                  >
+                    {events.map((event, index) => (
+                      <div key={event.id} className="w-full flex-shrink-0 px-2 lg:px-4">
+                        <Link href={`/eventos#${event.slug}`}>
+                          <Card className="bg-transparent border border-[#D4CFBC]/20 hover:border-[#D4CFBC] transition-all duration-700 overflow-hidden group cursor-pointer">
+                            <div className="relative h-48 md:h-64 lg:h-80">
+                              <Image
+                                src={event.image || "/placeholder.svg"}
+                                alt={event.title}
+                                fill
+                                className="object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                              <div className="absolute top-4 lg:top-6 right-4 lg:right-6">
+                                <Badge className="bg-[#D4CFBC] text-[#181313] font-bold tracking-[0.1em] uppercase text-xs lg:text-sm">
+                                  {event.date}
+                                </Badge>
+                              </div>
+                              <div className="absolute bottom-4 lg:bottom-8 left-4 lg:left-8 right-4 lg:right-8">
+                                <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-[0.1em] mb-2 lg:mb-4 uppercase">
+                                  {event.title}
+                                </h3>
+                                <div className="w-full h-px bg-[#D4CFBC] mb-2 lg:mb-4"></div>
+                                <div className="flex items-center justify-between text-xs lg:text-sm opacity-90 tracking-[0.1em] uppercase">
+                                  <span>{event.location}</span>
+                                  <span>{event.venue}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </Card>
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-            {/* Navigation */}
-            <button
-              onClick={prevEvent}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 lg:-translate-x-6 bg-transparent border border-[#D4CFBC] text-[#D4CFBC] p-3 lg:p-4 hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-500"
-            >
-              <ChevronLeft size={16} className="lg:w-5 lg:h-5" />
-            </button>
-            <button
-              onClick={nextEvent}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 lg:translate-x-6 bg-transparent border border-[#D4CFBC] text-[#D4CFBC] p-3 lg:p-4 hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-500"
-            >
-              <ChevronRight size={16} className="lg:w-5 lg:h-5" />
-            </button>
+                {/* Navigation */}
+                <button
+                  onClick={prevEvent}
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 lg:-translate-x-6 bg-transparent border border-[#D4CFBC] text-[#D4CFBC] p-3 lg:p-4 hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-500"
+                >
+                  <ChevronLeft size={16} className="lg:w-5 lg:h-5" />
+                </button>
+                <button
+                  onClick={nextEvent}
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 lg:translate-x-6 bg-transparent border border-[#D4CFBC] text-[#D4CFBC] p-3 lg:p-4 hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-500"
+                >
+                  <ChevronRight size={16} className="lg:w-5 lg:h-5" />
+                </button>
+              </>
+            )}
           </div>
         </div>
       </section>

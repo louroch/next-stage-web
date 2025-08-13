@@ -249,20 +249,40 @@ export default function SharedContactFooter() {
             </div>
 
             <div>
-              <h4 className="font-bold tracking-[0.1em] mb-6 uppercase text-sm text-[#D4CFBC]">SERVICIOS</h4>
-              <div className="space-y-3 text-xs tracking-[0.1em] uppercase text-[#D4CFBC]">
-                <p>BOOKING</p>
-                <p>MANAGEMENT</p>
-                <p>PRODUCCIÓN</p>
-                <p>CONSULTORÍA</p>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-bold tracking-[0.1em] mb-6 uppercase text-sm text-[#D4CFBC]">PARTNERS</h4>
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="w-14 h-7 sm:w-16 sm:h-8 bg-[#D4CFBC]/10 border border-[#D4CFBC]/20"></div>
-                <div className="w-14 h-7 sm:w-16 sm:h-8 bg-[#D4CFBC]/10 border border-[#D4CFBC]/20"></div>
+              <h4 className="font-bold tracking-[0.1em] mb-6 uppercase text-sm text-[#D4CFBC]">CONTACTO RÁPIDO</h4>
+              <div className="flex flex-wrap gap-4 sm:gap-6">
+                <Link
+                  href="https://www.instagram.com/nextstage.ar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 sm:w-12 sm:h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
+                >
+                  <Instagram size={18} className="sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-500" />
+                </Link>
+                <Link
+                  href="https://www.facebook.com/nextstage.ar/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 sm:w-12 sm:h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
+                >
+                  <Facebook size={18} className="sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-500" />
+                </Link>
+                <Link
+                  href="https://api.whatsapp.com/send?phone=5493814781887"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 sm:w-12 sm:h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
+                >
+                  <WhatsApp size={18} className="sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-500" />
+                </Link>
+                <Link
+                  href="https://linktr.ee/nextstagebooking?fbclid=PAQ0xDSwMHJ8NleHRuA2FlbQIxMQABp-sX24PSxrDsX9ys4K19lwV3lxxs8eM713XriVJtc0AAkj0vMFZwEbql4bNV_aem_bFaHlJnhABHk82i2S54Mzg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 sm:w-12 sm:h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
+                >
+                  <Linktree size={18} className="sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-500" />
+                </Link>
               </div>
             </div>
           </div>

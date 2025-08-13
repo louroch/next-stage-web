@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: 'Next Stage - Booking Artístico',
   description: 'Somos un booking que entiende la música como experiencia',
   generator: 'Next.js',
+  icons: {
+    icon: '/images/favicon.png',
+    shortcut: '/images/favicon.png',
+    apple: '/images/favicon.png',
+  },
 }
 
 export default function RootLayout({
