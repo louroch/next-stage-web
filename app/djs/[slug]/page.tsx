@@ -4,8 +4,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import SharedContactFooter from "@/components/shared-contact-footer"
-import { Instagram, Facebook, Music, Play, ExternalLink, Calendar, ArrowLeft, YouTube, Spotify, Linktree } from "@/components/ui/icons"
-import { use } from "react"
+import { Instagram, Facebook, Music, ExternalLink, Calendar, ArrowLeft, YouTube, Spotify, Linktree } from "@/components/ui/icons"
+import { use, useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 import { notFound } from "next/navigation"
 import SharedNavbar from "@/components/shared-navbar"
 import ScrollToTop from "@/components/scroll-to-top"
@@ -25,6 +26,7 @@ interface DJData {
   fullBio: string[]
   collaborations: string[]
   socialLinks?: SocialLinks
+  galleryImages?: string[]
 }
 
 const djsData: Record<string, DJData> = {
@@ -54,6 +56,12 @@ const djsData: Record<string, DJData> = {
     socialLinks: {
       instagram: "https://www.instagram.com/danielleon5?igsh=MTAwdGlqOWU0Z2xiOQ==",
     },
+    galleryImages: [
+      "/images/dani 1.webp",
+      "/images/dani 2.webp",
+      "/images/dani 3.webp",
+      "/images/dani 4.webp",
+    ],
   },
   balta: {
     name: "BALTA",
@@ -73,6 +81,12 @@ const djsData: Record<string, DJData> = {
       linktree: "https://linktr.ee/balta.dj?fbclid=PAQ0xDSwMIdjhleHRuA2FlbQIxMQABp_QQKDugkWIX29IKtZG5b68F67-YPM9m3Nm-0b38nDIQm8RdSHvHkG6YpOV8_aem_3CyafQwf7iDmIgcDthkafA",
       youtube: "https://m.youtube.com/@BALTAMusicc?fbclid=PAQ0xDSwMIdk1leHRuA2FlbQIxMAABpwtDED1X2-_wELJ8Kxuk5YVELsKtuDK5rC7Y9vJujE8NVyb-6RQ9skJEg8-N_aem_yodPWxtvFjY24giyRJTeow",
     },
+    galleryImages: [
+      "/images/balta 1.webp",
+      "/images/balta 2.webp",
+      "/images/balta 3.webp",
+      "/images/balta 4.webp",
+    ],
   },
   "kevin-balbi": {
     name: "KEVIN BALBI",
@@ -90,6 +104,12 @@ const djsData: Record<string, DJData> = {
       instagram: "https://www.instagram.com/kevinbalbi.music?igsh=enRxZnF0MWRlM3o3",
       youtube: "https://m.youtube.com/@kevinbalbimusic?fbclid=PAQ0xDSwMIdo1leHRuA2FlbQIxMAABp5eUv5WFqhzCheC2nMe0w-Y432rKsfAG8V7SNOxEQrpWwug5acPCT5Yko0td_aem_GjH74lrZDWT-NhZNYY-H7w",
     },
+    galleryImages: [
+      "/images/kevin 1.webp",
+      "/images/kevin 2.webp",
+      "/images/kevin 3.webp",
+      "/images/kevin 4.webp",
+    ],
   },
   "unusual-soul": {
     name: "UNUSUAL SOUL",
@@ -109,6 +129,12 @@ const djsData: Record<string, DJData> = {
       spotify: "https://open.spotify.com/intl-es/artist/6YBBrivtOKECLloC5BnCwF?si=VAt39HGHTcOr--FRzOnSNA&nd=1&utm_medium=organic&product=open&%24full_url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F6YBBrivtOKECLloC5BnCwF%3Fsi%3DVAt39HGHTcOr--FRzOnSNA&%24android_redirect_timeout=3000&feature=organic&_branch_match_id=1483899023354337287&_branch_referrer=H4sIAAAAAAAAA72NwUrEMBRFvybdTVsbHVAI0lbriGJBRXBVMknaeUyahJcXB1347baCvyDcxeUeLudAFOJVUcTgCcbPXIaQW3DH4jqg10mR8MG4jFXnY7J2SGjFYb0wXrOqW7Li%2FO%2Bt%2FLxMEgkiLWX73jQIH9Q%2F3LaP1rcXjWtPHeNdBMZv3mril7u73avqcbPpnr969%2FJU%2F6qktXupjv%2BgY9XW6YWerV7pNHrQAxoNaBQNBLPxiQQvyzIbjaSERnicpAOVfaMZDSK4adijP0WD4t5FkhPK%2BQediOnNVwEAAA%3D%3D&fbclid=PAQ0xDSwMIdtBleHRuA2FlbQIxMAABp2ETLFnjldJH6D9o9np0pSsAqOwgvGdlZhsctPXqeg5acPCT5Yko0td_aem_pFjVuFD2i4nB7aBjXBm1rA",
       instagram: "https://www.instagram.com/unusualsoul.music?igsh=MXU1c3QwZHNmbm11Zw==",
     },
+    galleryImages: [
+      "/images/unusual 1.webp",
+      "/images/unusual 2.webp",
+      "/images/unusual 3.webp",
+      "/images/unusual 4.webp",
+    ],
   },
 }
 
@@ -119,6 +145,37 @@ export default function DJProfilePage({ params }: { params: Promise<{ slug: stri
   if (!dj) {
     notFound()
   }
+  const [lightbox, setLightbox] = useState<{ open: boolean; index: number; images: string[] }>({ open: false, index: 0, images: [] })
+  const galleryImages = dj.galleryImages && dj.galleryImages.length > 0
+    ? dj.galleryImages
+    : Array.from({ length: 6 }, () => dj.image)
+
+  // Zoom/Pan state for lightbox
+  const [zoomScale, setZoomScale] = useState(1)
+  const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+
+  useEffect(() => {
+    if (lightbox.open) {
+      // reset zoom on open or image change
+      setZoomScale(1)
+      setOffset({ x: 0, y: 0 })
+    }
+  }, [lightbox.open, lightbox.index])
+
+  // prevent background scroll when lightbox is open
+  useEffect(() => {
+    if (!lightbox.open) return
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.body.style.overflow = prevOverflow
+    }
+  }, [lightbox.open])
+
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => setIsMounted(true), [])
 
   return (
     <div className="min-h-screen bg-[#181313] text-[#D4CFBC]">
@@ -152,9 +209,6 @@ export default function DJProfilePage({ params }: { params: Promise<{ slug: stri
                   height={600}
                   className="w-full h-full object-cover filter grayscale"
                 />
-              </div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#D4CFBC] rounded-full flex items-center justify-center">
-                <Play className="w-8 h-8 text-[#181313] ml-1" />
               </div>
             </div>
 
@@ -278,20 +332,100 @@ export default function DJProfilePage({ params }: { params: Promise<{ slug: stri
         <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl font-bold tracking-wider uppercase mb-12 text-center">GALERÍA</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-              <div key={item} className="aspect-square bg-[#2a2424] rounded-lg overflow-hidden group cursor-pointer">
+            {galleryImages.map((src, idx) => (
+              <button
+                key={idx}
+                className="relative aspect-square bg-[#2a2424] rounded-lg overflow-hidden group cursor-pointer"
+                onClick={() => setLightbox({ open: true, index: idx, images: galleryImages })}
+              >
                 <Image
-                  src={`/placeholder.svg?height=300&width=300&text=Gallery+${item}`}
-                  alt={`Gallery ${item}`}
+                  src={src}
+                  alt={`Gallery ${idx + 1}`}
                   width={300}
                   height={300}
                   className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
-              </div>
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </button>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      {isMounted && lightbox.open && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center"
+          onClick={() => setLightbox({ open: false, index: 0, images: [] })}
+          onWheel={(e) => {
+            e.preventDefault()
+            const delta = -e.deltaY
+            setZoomScale((s) => {
+              const next = Math.min(3, Math.max(1, s + delta * 0.0015))
+              if (next === 1) setOffset({ x: 0, y: 0 })
+              return next
+            })
+          }}
+        >
+          <button
+            className="absolute top-4 right-4 text-white border border-white/40 px-3 py-1 uppercase tracking-widest"
+            onClick={() => setLightbox({ open: false, index: 0, images: [] })}
+          >
+            Cerrar
+          </button>
+          <button
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white border border-white/40 px-3 py-1"
+            onClick={(e) => {
+              e.stopPropagation()
+              setLightbox((s) => ({ ...s, index: (s.index - 1 + (s.images.length || 1)) % (s.images.length || 1) }))
+              setZoomScale(1)
+              setOffset({ x: 0, y: 0 })
+            }}
+          >
+            ‹
+          </button>
+          <div
+            className={`max-w-[90vw] max-h-[85vh] ${zoomScale > 1 ? "cursor-grab" : "cursor-default"}`}
+            onMouseDown={(e) => {
+              if (zoomScale === 1) return
+              setIsDragging(true)
+              setDragStart({ x: e.clientX - offset.x, y: e.clientY - offset.y })
+            }}
+            onMouseMove={(e) => {
+              if (!isDragging) return
+              setOffset({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y })
+            }}
+            onMouseUp={() => setIsDragging(false)}
+            onMouseLeave={() => setIsDragging(false)}
+            onDoubleClick={(e) => {
+              e.stopPropagation()
+              setZoomScale((s) => (s === 1 ? 2 : 1))
+              if (zoomScale === 1) setOffset({ x: 0, y: 0 })
+            }}
+          >
+            <Image
+              src={lightbox.images[lightbox.index] || "/placeholder.svg"}
+              alt={`Lightbox ${lightbox.index + 1}`}
+              width={1600}
+              height={1200}
+              className="w-auto h-auto max-w-full max-h-[85vh] object-contain select-none"
+              draggable={false}
+              style={{ transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoomScale})` }}
+            />
+          </div>
+          <button
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white border border-white/40 px-3 py-1"
+            onClick={(e) => {
+              e.stopPropagation()
+              setLightbox((s) => ({ ...s, index: (s.index + 1) % (s.images.length || 1) }))
+              setZoomScale(1)
+              setOffset({ x: 0, y: 0 })
+            }}
+          >
+            ›
+          </button>
+        </div>, document.body)
+      }
 
       <SharedContactFooter />
       <ScrollToTop />

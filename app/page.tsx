@@ -21,13 +21,17 @@ export default function HomePage() {
   const { width: windowWidth } = useWindowSize()
   const [currentEventIndex, setCurrentEventIndex] = useState(0)
   const [currentDJIndex, setCurrentDJIndex] = useState(0)
-  const [activeFilter, setActiveFilter] = useState("ALL")
-  const [galleryImages, setGalleryImages] = useState([
-    "/placeholder.svg?height=300&width=400",
-    "/placeholder.svg?height=300&width=400",
-    "/placeholder.svg?height=300&width=400",
-    "/placeholder.svg?height=300&width=400",
-  ])
+  
+  const heroImages = [
+    "/images/encabezado 1.webp",
+    "/images/encabezado 2.webp",
+    "/images/encabezado 3.webp",
+    "/images/encabezado 4.webp",
+    "/images/encabezado 5.webp",
+    "/images/encabezado 6.webp",
+  ]
+  const [currentHeroIndex, setCurrentHeroIndex] = useState(0)
+  
 
   const eventCarouselRef = useRef<HTMLDivElement>(null)
   const djCarouselRef = useRef<HTMLDivElement>(null)
@@ -91,6 +95,13 @@ export default function HomePage() {
       slug: "unusual-soul",
     },
   ]
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentHeroIndex((prev) => (prev + 1) % heroImages.length)
+    }, 5000)
+    return () => clearInterval(intervalId)
+  }, [heroImages.length])
 
   const handleMouseDown = (e: React.MouseEvent, carouselRef: React.RefObject<HTMLDivElement | null>) => {
     if (!carouselRef.current) return
@@ -168,14 +179,25 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#181313] text-[#D4CFBC] overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative min-h-screen pt-24 md:pt-28 lg:pt-20 lg:h-screen overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80 z-10" />
-        <Image
-          src="/placeholder.svg?height=1080&width=1920"
-          alt="Event Background"
-          fill
-          className="object-cover filter grayscale"
-          priority
-        />
+        <div className="absolute inset-x-0 top-14 md:top-20 lg:top-[7.5rem] xl:top-36 bottom-0">
+          {heroImages.map((src, index) => (
+            <Image
+              key={src}
+              src={src}
+              alt={`Hero ${index + 1}`}
+              fill
+              className={`object-cover transition-opacity duration-700 ease-in-out ${
+                index === 5
+                  ? "object-[30%_50%] md:object-center" // encabezado 6: énfasis hacia la izquierda en mobile (mitad del ajuste previo)
+                  : index === 4
+                  ? "object-[90%_50%] md:object-center" // encabezado 5: más a la derecha en mobile
+                  : "object-[80%_50%] md:object-center"
+              } ${index === currentHeroIndex ? "opacity-100" : "opacity-0"}`}
+              priority={index === 0}
+            />
+          ))}
+        </div>
+        <div className="absolute inset-x-0 top-14 md:top-20 lg:top-[7.5rem] xl:top-36 bottom-0 bg-gradient-to-b from-black/60 to-black/80 z-10" />
 
         {/* Navigation */}
         <nav
@@ -810,55 +832,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section className="py-24 px-4 lg:px-12 bg-black/20">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-20">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-4xl md:text-6xl font-bold tracking-[0.1em] uppercase">RECAP</h2>
-              <div className="w-16 h-px bg-[#D4CFBC]"></div>
-            </div>
-
-            {/* Filters */}
-            <div className="flex space-x-6 text-sm tracking-[0.2em] uppercase">
-              {["ALL", "FESTIVAL", "CLUB", "PRIVATE"].map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`transition-all duration-500 relative ${
-                    activeFilter === filter ? "text-white" : "text-[#D4CFBC] hover:text-white"
-                  }`}
-                >
-                  {filter}
-                  {activeFilter === filter && (
-                    <span className="absolute -bottom-1 left-0 w-full h-px bg-[#D4CFBC]"></span>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((image, index) => (
-              <div key={index} className="group cursor-pointer relative overflow-hidden">
-                <Image
-                  src={image || "/placeholder.svg"}
-                  alt={`Gallery ${index + 1}`}
-                  width={400}
-                  height={300}
-                  className="w-full h-64 object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-center justify-center">
-                  <div className="text-center">
-                    <Badge className="bg-[#D4CFBC] text-[#181313] mb-2">2024</Badge>
-                    <p className="text-sm tracking-[0.1em] uppercase">FESTIVAL</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Shared Contact Footer */}
       <SharedContactFooter />
