@@ -160,7 +160,7 @@ export default function HomePage() {
               fill
               className={`object-cover transition-opacity duration-700 ease-in-out ${
                 index === 5
-                  ? "object-[40%_60%] md:object-center" // encabezado 6: más a la derecha, top igual
+                  ? "object-[40%_70%] md:object-center" // encabezado 6: más a la derecha y más top
                   : index === 4
                   ? "object-[90%_50%] md:object-center" // encabezado 5: más a la derecha en mobile
                   : index === 0
