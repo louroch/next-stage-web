@@ -167,7 +167,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#181313] text-[#D4CFBC] overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-screen pt-16 md:pt-20 lg:pt-0 lg:h-screen overflow-hidden">
+      <section className="relative min-h-screen pt-24 md:pt-28 lg:pt-20 lg:h-screen overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80 z-10" />
         <Image
           src="/placeholder.svg?height=1080&width=1920"
@@ -350,14 +350,14 @@ export default function HomePage() {
 
               {/* Hero Text */}
               <div className="relative min-h-[180px] lg:min-h-[280px] flex items-center">
-                <div className="space-y-6 lg:space-y-8 max-w-5xl">
+                <div className="space-y-5 lg:space-y-7 max-w-5xl">
                   <div className="relative">
-                    <h1 className="text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-black tracking-tight uppercase leading-[0.9]">
+                    <h1 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight uppercase leading-[1.05]">
                       SOMOS UN BOOKING QUE ENTIENDE LA MÚSICA COMO EXPERIENCIA
                     </h1>
-                    <div className="absolute -bottom-2 left-0 w-24 lg:w-40 h-0.5 bg-[#D4CFBC]"></div>
+                    <div className="absolute -bottom-2 left-0 w-24 lg:w-32 h-0.5 bg-[#D4CFBC]"></div>
                   </div>
-                  <p className="text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed opacity-90 max-w-4xl">
+                  <p className="text-sm md:text-lg lg:text-xl xl:text-2xl leading-relaxed opacity-90 max-w-4xl">
                     No solo representamos talento, lo hacemos crecer. Next Stage nace con una idea simple: que el
                     talento no se quede quieto, que empiece a ocupar el lugar que merece.
                   </p>
