@@ -93,16 +93,18 @@ const djsData: Record<string, DJData> = {
   },
   "unusual-soul": {
     name: "UNUSUAL SOUL",
-    genres: ["ELECTRONIC", "AMBIENT", "EXPERIMENTAL"],
+    genres: ["PROGRESSIVE"],
     image: "/images/unusual-soul.webp",
-    shortBio: "Artista electrónico que explora los límites del sonido y crea experiencias únicas.",
+    shortBio: "DJ y productor detallista, meticuloso y apasionado por el progressive, con melodías hipnóticas y profundidad emocional.",
     fullBio: [
-      "UNUSUAL SOUL es un artista electrónico que trasciende los géneros tradicionales para crear experiencias sonoras únicas y envolventes. Su música es un viaje a través de paisajes sonoros que desafían las convenciones establecidas.",
-      "Con un enfoque experimental y vanguardista, UNUSUAL SOUL combina elementos de ambient, electronic y música experimental para crear composiciones que van más allá del entretenimiento, convirtiéndose en experiencias sensoriales completas.",
-      "Su propuesta artística se caracteriza por la búsqueda constante de nuevos sonidos y la exploración de las posibilidades expresivas de la música electrónica. Cada track es una invitación a sumergirse en universos sonoros únicos.",
-      "Actualmente, UNUSUAL SOUL continúa expandiendo los límites de su creatividad, desarrollando proyectos que combinan música, tecnología y arte visual para crear experiencias inmersivas que trascienden lo convencional.",
+      "Unusual Soul no solo busca sonar bien, busca resonar.",
+      "DJ y productor detallista, meticuloso y apasionado por el progressive, su sonido combina melodías hipnóticas, estructuras sólidas y una profundidad emocional que invita a viajar con los ojos cerrados.",
+      "Nacido en Tucumán, encontró en el universo sonoro de referentes como Hernán Cattáneo, Cid Inc. y Nick Warren el impulso que lo llevó a descubrir y pulir su propia identidad artística.",
+      "Durante años, se enfocó en crecer desde adentro hacia afuera: perfeccionó sus habilidades, lanzó música en sellos como Mango Alley, Juicebox y Warpp, y fue ganando el apoyo de grandes nombres de la escena nacional e internacional.",
+      "Hoy, el siguiente paso es claro: quiere compartir más su música en vivo, llevarla a la pista, y conectar con públicos que puedan sentir lo que él siente al crear.",
+      "Unusual Soul abre una nueva etapa en su camino: un salto que lo acerca más a su esencia y lo proyecta directo a su Next Stage.",
     ],
-    collaborations: ["Artistas experimentales", "Colectivos underground", "Festivales alternativos"],
+    collaborations: ["Malena Narvay", "Oh My Pop!", "Axel Giova"],
     socialLinks: {
       spotify: "https://open.spotify.com/intl-es/artist/6YBBrivtOKECLloC5BnCwF?si=VAt39HGHTcOr--FRzOnSNA&nd=1&utm_medium=organic&product=open&%24full_url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F6YBBrivtOKECLloC5BnCwF%3Fsi%3DVAt39HGHTcOr--FRzOnSNA&%24android_redirect_timeout=3000&feature=organic&_branch_match_id=1483899023354337287&_branch_referrer=H4sIAAAAAAAAA72NwUrEMBRFvybdTVsbHVAI0lbriGJBRXBVMknaeUyahJcXB1347baCvyDcxeUeLudAFOJVUcTgCcbPXIaQW3DH4jqg10mR8MG4jFXnY7J2SGjFYb0wXrOqW7Li%2FO%2Bt%2FLxMEgkiLWX73jQIH9Q%2F3LaP1rcXjWtPHeNdBMZv3mril7u73avqcbPpnr969%2FJU%2F6qktXupjv%2BgY9XW6YWerV7pNHrQAxoNaBQNBLPxiQQvyzIbjaSERnicpAOVfaMZDSK4adijP0WD4t5FkhPK%2BQediOnNVwEAAA%3D%3D&fbclid=PAQ0xDSwMIdtBleHRuA2FlbQIxMAABp2ETLFnjldJH6D9o9np0pSsAqOwgvGdlZhsctPXqeg5acPCT5Yko0td_aem_pFjVuFD2i4nB7aBjXBm1rA",
       instagram: "https://www.instagram.com/unusualsoul.music?igsh=MXU1c3QwZHNmbm11Zw==",
@@ -123,11 +125,11 @@ export default function DJProfilePage({ params }: { params: Promise<{ slug: stri
       <SharedNavbar currentPage="djs" />
       
       {/* Spacer for fixed navbar */}
-      <div className="h-16"></div>
+      <div className="h-20 lg:h-20"></div>
 
 
       {/* Back to Artists */}
-      <div className="px-6 lg:px-8 py-4">
+      <div className="px-6 lg:px-8 pt-2 pb-6">
         <Link
           href="/djs"
           className="inline-flex items-center text-[#D4CFBC] hover:text-white transition-colors duration-300 mb-8 group"
@@ -223,13 +225,7 @@ export default function DJProfilePage({ params }: { params: Promise<{ slug: stri
                 )}
               </div>
 
-              {/* Booking Button */}
-              <Link href="/#contacto">
-                <Button className="bg-[#D4CFBC] text-[#181313] hover:bg-white px-8 py-6 text-sm font-medium tracking-widest uppercase rounded-none transition-all duration-300">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  BOOKING
-                </Button>
-              </Link>
+              {/* Sin botón de booking: el formulario está debajo */}
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Menu, X, ArrowLeft } from "@/components/ui/icons"
 import { useScrollPosition } from "@/hooks/useScrollPosition"
+import { createPortal } from "react-dom"
 
 interface SharedNavbarProps {
   currentPage?: string
@@ -13,6 +14,7 @@ interface SharedNavbarProps {
 export default function SharedNavbar({ currentPage }: SharedNavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { isNavbarVisible } = useScrollPosition()
+  const [mounted, setMounted] = useState(false)
 
   const navItems = [
     { href: "/", label: "INICIO", isActive: currentPage === "home", isExternal: false },
@@ -32,23 +34,41 @@ export default function SharedNavbar({ currentPage }: SharedNavbarProps) {
     setIsMobileMenuOpen(false)
   }
 
+  useEffect(() => {
+    if (typeof document === "undefined") return
+    const body = document.body
+    if (isMobileMenuOpen) {
+      body.classList.add("overflow-hidden")
+    } else {
+      body.classList.remove("overflow-hidden")
+    }
+    return () => body.classList.remove("overflow-hidden")
+  }, [isMobileMenuOpen])
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
     <>
       {/* Navigation */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-30 bg-[#181313]/90 backdrop-blur-sm border-b border-[#D4CFBC]/10 transition-transform duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[2000] bg-[#181313]/90 backdrop-blur-sm border-b border-[#D4CFBC]/10 transition-transform duration-300 ${
           isNavbarVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="flex items-center justify-between py-2 px-4 lg:px-6">
-          <div className="w-24 lg:w-32">
-            <Image
-              src="/images/nextstage-logo.png"
-              alt="NEXTSTAGE"
-              width={160}
-              height={40}
-              className="w-full h-auto"
-            />
+        <div className="flex items-center justify-between py-3 px-4 lg:px-6">
+          <div className="w-28 lg:w-40">
+            <Link href="/" aria-label="Ir al inicio" className="block">
+              <Image
+                src="/images/nextstage-logo.png"
+                alt="NEXTSTAGE"
+                width={200}
+                height={48}
+                className="w-full h-auto"
+                priority
+              />
+            </Link>
           </div>
 
           {/* Desktop Menu */}
@@ -97,22 +117,22 @@ export default function SharedNavbar({ currentPage }: SharedNavbarProps) {
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="fixed inset-0 bg-[#181313] z-[90] lg:hidden">
+        {mounted && isMobileMenuOpen && createPortal(
+          <div className="fixed inset-0 bg-[#181313] z-[2100] lg:hidden overflow-y-auto overscroll-contain">
             <button
               onClick={closeMobileMenu}
-              className="absolute top-8 left-8 w-12 h-12 rounded-full border border-[#D4CFBC] flex items-center justify-center hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-300"
+              className="absolute top-4 left-4 w-12 h-12 rounded-full border border-[#D4CFBC] flex items-center justify-center hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-300"
               aria-label="Close menu"
             >
               <ArrowLeft size={20} />
             </button>
 
-            <div className="flex flex-col items-center justify-center h-full space-y-12 text-xl font-medium tracking-[0.2em] uppercase">
-              {navItems.map((item) => {
+            <div className="flex flex-col items-center justify-center min-h-[100vh] pt-16 pb-24 space-y-8 text-lg sm:text-xl font-medium tracking-[0.2em] uppercase">
+              {navItems.map((item, idx) => {
                 if (item.isExternal) {
                   return (
                     <a
-                      key={item.href}
+                      key={`${item.href}-${idx}`}
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -128,20 +148,21 @@ export default function SharedNavbar({ currentPage }: SharedNavbarProps) {
                 }
                 return (
                   <Link
-                    key={item.href}
+                    key={`${item.href}-${idx}`}
                     href={item.href}
                     className="hover:text-white transition-colors duration-300 relative group overflow-hidden py-2"
                     onClick={closeMobileMenu}
                   >
                     <span className="relative">
                       {item.label}
-                      <span className="absolute -bottom-0 left-0 w-0 h-0.5 bg-[#D4CFBC] transition-all duration-300 group-hover:w-full"></span>
+                      <span className="absolute -bottom-0 left-0 w-0.5 h-0.5 bg-[#D4CFBC] transition-all duration-300 group-hover:w-full"></span>
                     </span>
                   </Link>
                 )
               })}
             </div>
-          </div>
+          </div>,
+          document.body
         )}
       </nav>
     </>

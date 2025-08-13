@@ -109,10 +109,10 @@ export default function EventosPage() {
       <SharedNavbar currentPage="eventos" />
       
       {/* Spacer for fixed navbar */}
-      <div className="h-16"></div>
+      <div className="h-20 lg:h-20"></div>
 
       {/* Hero Section */}
-      <section className="px-6 lg:px-8 py-12 relative">
+      <section className="px-6 lg:px-8 pt-24 lg:pt-16 pb-12 relative">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
             <Link
@@ -139,9 +139,9 @@ export default function EventosPage() {
             <div className="mb-16">
               {/* Bold title with horizontal line */}
               <div className="relative mb-8">
-                <h1 className="text-7xl lg:text-9xl font-black tracking-tighter uppercase leading-none">EVENTOS</h1>
-                {/* Horizontal line extending from title */}
-                <div className="absolute top-1/2 right-0 w-32 lg:w-48 h-0.5 bg-[#D4CFBC] transform -translate-y-1/2"></div>
+                <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black tracking-tighter uppercase leading-none">EVENTOS</h1>
+                {/* Horizontal line extending from title (only large screens) */}
+                <div className="hidden lg:block lg:absolute lg:top-1/2 lg:left-full lg:ml-6 lg:w-48 h-0.5 bg-[#D4CFBC] transform -translate-y-1/2"></div>
               </div>
 
               <p className="text-xl opacity-90 max-w-3xl leading-relaxed font-light">

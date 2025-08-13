@@ -56,12 +56,12 @@ export default function ArtistsListingPage() {
     <div className="min-h-screen bg-[#181313] text-[#D4CFBC]">
       <SharedNavbar currentPage="djs" />
       
-      {/* Spacer for fixed navbar */}
-      <div className="h-16"></div>
+      {/* Spacer for fixed navbar (match navbar height) */}
+      <div className="h-20 lg:h-20"></div>
 
 
       {/* Hero Section */}
-      <section className="px-6 lg:px-8 py-12 relative">
+      <section className="px-6 lg:px-8 pt-24 lg:pt-16 pb-12 relative">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
             <Link
@@ -88,9 +88,9 @@ export default function ArtistsListingPage() {
             <div className="mb-16">
               {/* Bold title with horizontal line */}
               <div className="relative mb-8">
-                <h1 className="text-7xl lg:text-9xl font-black tracking-tighter uppercase leading-none">ARTISTAS</h1>
-                {/* Horizontal line extending from title */}
-                <div className="absolute top-1/2 right-0 w-32 lg:w-48 h-0.5 bg-[#D4CFBC] transform -translate-y-1/2"></div>
+                <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black tracking-tighter uppercase leading-none">ARTISTAS</h1>
+                {/* Horizontal line extending from title (only on large screens to avoid overlay on text) */}
+                <div className="hidden lg:block lg:absolute lg:top-1/2 lg:left-full lg:ml-6 lg:w-48 h-0.5 bg-[#D4CFBC] transform -translate-y-1/2"></div>
               </div>
 
               <p className="text-xl opacity-90 max-w-3xl leading-relaxed font-light">
@@ -113,8 +113,10 @@ export default function ArtistsListingPage() {
                     <Image
                       src={artist.image || "/placeholder.svg"}
                       alt={artist.name}
-                      width={600}
-                      height={600}
+                      width={800}
+                      height={800}
+                      quality={90}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                       className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
                     />
                   </div>

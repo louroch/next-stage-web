@@ -1,6 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { emailService } from "@/lib/email-service"
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 export async function POST(request: NextRequest) {
   try {
     const { name, email, subject, message } = await request.json()
@@ -14,16 +17,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Email inválido" }, { status: 400 })
     }
 
-    // Verificar servicio Gmail
-    const stats = emailService.getStats()
-    if (!stats.isInitialized) {
-      console.error("❌ Servicio de email no disponible.")
-      return NextResponse.json(
-        { error: "Servicio de email no disponible. Contacta al administrador." },
-        { status: 503 }
-      )
-    }
-
     console.log("📧 Enviando email de contacto con Gmail...")
     const result = await emailService.sendContactFormEmail({
       name,
@@ -34,6 +27,7 @@ export async function POST(request: NextRequest) {
 
     if (result) {
       console.log("✅ Email enviado exitosamente con Gmail")
+      const stats = emailService.getStats()
       return NextResponse.json(
         { message: "¡Mensaje enviado correctamente! Te contactaremos pronto.", provider: stats.provider },
         { status: 200 }

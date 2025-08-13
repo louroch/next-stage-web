@@ -232,15 +232,9 @@ export default function DJProfile() {
               PARA CONTRATACIONES Y COLABORACIONES CONTACTA DIRECTAMENTE CON NUESTRO EQUIPO
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 pt-8">
-              <Button
-                size="lg"
-                className="bg-transparent border-2 border-[#D4CFBC] text-[#D4CFBC] hover:bg-[#D4CFBC] hover:text-[#181313] transition-all duration-500 text-sm font-bold tracking-[0.2em] px-12 py-4 uppercase"
-              >
-                CONTACTAR AHORA
-              </Button>
-              <div className="text-sm tracking-[0.1em] opacity-70">
+              <div className="text-sm tracking-[0.1em] opacity-70 text-center">
                 <p>BOOKING@NEXTSTAGE.COM</p>
-                <p>+34 600 123 456</p>
+                <p>+54 9 381 478-1887</p>
               </div>
             </div>
           </div>
@@ -318,7 +312,7 @@ export default function DJProfile() {
                   <Facebook size={16} className="group-hover:scale-110 transition-transform duration-500" />
                 </Link>
                 <Link
-                  href="https://api.whatsapp.com/send?phone=543814781887&fbclid=PAQ0xDSwMHJ4RleHRuA2FlbQIxMAABpyOa7Qbzrla0GeMDiu2OnqYFLcO-fuZr-STK5WujO06HZdCiIJH4Ch9vZOnQ_aem_yETdk4r4lbOX0JCQmBa_Mg"
+                  href="https://api.whatsapp.com/send?phone=5493814781887"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group"

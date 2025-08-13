@@ -1,9 +1,15 @@
-import { Inter, Roboto, Oswald, Timmana } from 'next/font/google'
+import { Inter, Oswald } from 'next/font/google'
+import localFont from 'next/font/local'
 
-// Fuente para cuerpo de texto - Roboto
-export const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
+// Roboto (local)
+export const roboto = localFont({
+  src: [
+    {
+      path: '../public/fonts/Roboto/static/Roboto_Condensed-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
   variable: '--font-roboto',
   display: 'swap',
 })
@@ -15,7 +21,7 @@ export const inter = Inter({
   display: 'swap',
 })
 
-// Oswald para títulos/subtítulos
+// Oswald disponible si se requiere como fallback (no se usa para títulos)
 export const oswald = Oswald({
   subsets: ['latin'],
   weight: ['200', '300', '400', '500', '600', '700'],
@@ -23,16 +29,28 @@ export const oswald = Oswald({
   display: 'swap',
 })
 
-// Timmana para subtítulos
-export const timmana = Timmana({
-  subsets: ['latin'],
-  weight: '400',
+// Timmana (local) para subtítulos
+export const timmana = localFont({
+  src: [
+    {
+      path: '../public/fonts/Timmana/Timmana-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
   variable: '--font-timmana',
   display: 'swap',
 })
 
-// Fuentes personalizadas con fallback a Inter (Special Gothic Expanded One)
-export const specialGothic = {
+// Special Gothic Expanded One (local) para títulos
+export const specialGothic = localFont({
+  src: [
+    {
+      path: '../public/fonts/Special_Gothic_Expanded_One/SpecialGothicExpandedOne-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
   variable: '--font-special-gothic',
-  style: { fontFamily: 'var(--font-inter), Inter, system-ui, sans-serif' }
-}
+  display: 'swap',
+})

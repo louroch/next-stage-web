@@ -155,7 +155,7 @@ export default function SharedContactFooter() {
                 <h3 className="text-xl font-bold tracking-[0.1em] mb-6 uppercase text-[#D4CFBC]">CONTACTO</h3>
                 <div className="space-y-4 text-sm tracking-[0.1em] text-[#D4CFBC]">
                   <div>NEXTSTAGEBOOKING@GMAIL.COM</div>
-                  <div>+34 600 123 456</div>
+                  <div>+54 9 381 478-1887</div>
                 </div>
               </div>
 
@@ -179,7 +179,7 @@ export default function SharedContactFooter() {
                     <Facebook size={18} className="sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-500" />
                   </Link>
                   <Link
-                    href="https://api.whatsapp.com/send?phone=543814781887&fbclid=PAQ0xDSwMHJ4RleHRuA2FlbQIxMAABpyOa7Qbzrla0GeMDiu2OnqYFLcO-fuZr-STK5WujO06HZdCiIJH4Ch9vZOnQ_aem_yETdk4r4lbOX0JCQmBa_Mg"
+                    href="https://api.whatsapp.com/send?phone=5493814781887"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 sm:w-12 sm:h-12 border border-[#D4CFBC]/30 hover:border-[#D4CFBC] flex items-center justify-center transition-all duration-500 group text-[#D4CFBC]"
